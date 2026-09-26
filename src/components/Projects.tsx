@@ -1,20 +1,89 @@
+import Box from '@mui/material/Box'
+import Card from '@mui/material/Card'
+import Chip from '@mui/material/Chip'
+import Container from '@mui/material/Container'
+import Link from '@mui/material/Link'
+import Typography from '@mui/material/Typography'
+import type { SxProps, Theme } from '@mui/material/styles'
+
 import { projects, type Project } from '../data/cv'
 import { externalLinkProps } from '../utils/links'
+import { accents, glassHover, glassTokens } from '../theme/glass'
+import { displayFont } from '../theme/theme'
 import Icon from './Icon'
 import Reveal from './Reveal'
+import Section from './Section'
+import SectionHead from './SectionHead'
 
 const featured = projects.find((project) => project.featured)
 const openSource = projects.filter((project) => !project.featured)
 
+const gridSx: SxProps<Theme> = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+  gap: '18px',
+}
+
+/**
+ * Base card recipe. Card itself only sets `overflow: hidden`, so the flex
+ * column (and `flex: 1` on the description) is what keeps card footers aligned.
+ */
+const cardSx: SxProps<Theme> = {
+  ...glassHover,
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '26px',
+  gap: '14px',
+}
+
+const featuredCardSx: SxProps<Theme> = {
+  ...cardSx,
+  gridColumn: '1 / -1',
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: '32px',
+  padding: '32px',
+  background: `linear-gradient(120deg, ${accents.a}14, ${accents.b}1a), ${glassTokens.bg}`,
+  '@media (max-width:820px)': {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  },
+}
+
+const tagsSx: SxProps<Theme> = {
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '6px',
+}
+
+const visualSx: SxProps<Theme> = {
+  flexShrink: 0,
+  width: 220,
+  height: 140,
+  borderRadius: '14px',
+  display: 'grid',
+  placeItems: 'center',
+  fontFamily: displayFont,
+  fontWeight: 800,
+  fontSize: 26,
+  color: 'text.primary',
+  background: [
+    `radial-gradient(circle at 30% 20%, ${accents.a}40, transparent 60%)`,
+    `radial-gradient(circle at 75% 80%, ${accents.b}40, transparent 60%)`,
+    'rgba(255, 255, 255, 0.04)',
+  ].join(', '),
+  border: `1px solid ${glassTokens.border}`,
+  '@media (max-width:820px)': { width: '100%', height: 120 },
+}
+
 function ProjectTags({ tags }: { tags: string[] }) {
   return (
-    <div className="project-tags">
+    <Box sx={tagsSx}>
       {tags.map((tag) => (
-        <span className="chip" key={tag}>
-          {tag}
-        </span>
+        <Chip key={tag} label={tag} />
       ))}
-    </div>
+    </Box>
   )
 }
 
@@ -22,60 +91,102 @@ function ProjectLink({ project, label }: { project: Project; label: string }) {
   if (!project.href) return null
 
   return (
-    <a
-      className="project-link"
+    <Link
       href={project.href}
+      sx={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '6px',
+        fontSize: '13.5px',
+        fontWeight: 600,
+        color: 'primary.main',
+        '&:hover': { textDecoration: 'underline' },
+      }}
       {...externalLinkProps(project.href)}
     >
       {label}
       <Icon name="external" size={14} />
-    </a>
+    </Link>
   )
 }
 
 export default function Projects() {
   return (
-    <section id="projects" className="section">
-      <div className="container">
-        <Reveal className="section-head">
-          <span className="section-kicker">Projects</span>
-          <h2 className="section-title">Things I&rsquo;ve built</h2>
-          <p className="section-sub">
-            A live product plus the open-source hooks and utilities I reach for in my own
-            work. Every card links out to the running site or the source.
-          </p>
-        </Reveal>
+    <Section id="projects">
+      <Container>
+        <SectionHead
+          kicker="Projects"
+          title="Things I’ve built"
+          sub="A live product plus the open-source hooks and utilities I reach for in my own work. Every card links out to the running site or the source."
+        />
 
-        <div className="project-grid">
+        <Box sx={gridSx}>
           {featured ? (
-            <Reveal className="project-card project-featured glass glass-hover">
-              <div className="project-body">
-                <span className="project-flag">Live</span>
-                <h3>{featured.name}</h3>
-                <p>{featured.description}</p>
+            <Reveal component={Card} sx={featuredCardSx}>
+              <Box
+                sx={{
+                  flex: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  gap: '12px',
+                }}
+              >
+                <Typography
+                  component="span"
+                  sx={{
+                    display: 'inline-block',
+                    fontSize: 11,
+                    fontWeight: 700,
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    color: 'warning.main',
+                    mb: '10px',
+                  }}
+                >
+                  Live
+                </Typography>
+
+                <Typography variant="h3" sx={{ fontSize: 17, fontWeight: 700 }}>
+                  {featured.name}
+                </Typography>
+
+                <Typography sx={{ flex: 1, color: 'text.secondary', fontSize: 14 }}>
+                  {featured.description}
+                </Typography>
+
                 <ProjectTags tags={featured.tags} />
                 <ProjectLink project={featured} label="Visit the site" />
-              </div>
-              <div className="project-visual" aria-hidden="true">
+              </Box>
+
+              <Box sx={visualSx} aria-hidden>
                 {featured.name.replace(/\..*$/, '')}
-              </div>
+              </Box>
             </Reveal>
           ) : null}
 
           {openSource.map((project, index) => (
             <Reveal
               key={project.name}
-              className="project-card glass glass-hover"
+              component={Card}
+              sx={cardSx}
               delay={index * 60}
             >
-              <h3>{project.name}</h3>
-              <p>{project.description}</p>
+              <Typography variant="h3" sx={{ fontSize: 17, fontWeight: 700 }}>
+                {project.name}
+              </Typography>
+
+              <Typography sx={{ flex: 1, color: 'text.secondary', fontSize: 14 }}>
+                {project.description}
+              </Typography>
+
               <ProjectTags tags={project.tags} />
               <ProjectLink project={project} label="View source" />
             </Reveal>
           ))}
-        </div>
-      </div>
-    </section>
+        </Box>
+      </Container>
+    </Section>
   )
 }
+

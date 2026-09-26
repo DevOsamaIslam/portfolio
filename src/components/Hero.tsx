@@ -1,55 +1,144 @@
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import Chip from '@mui/material/Chip'
+import Container from '@mui/material/Container'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+import { alpha } from '@mui/material/styles'
+import type { SxProps, Theme } from '@mui/material/styles'
+
 import { contacts, profile } from '../data/cv'
 import { externalLinkProps } from '../utils/links'
+import { accents, glassTokens } from '../theme/glass'
+import { displayFont } from '../theme/theme'
 import Icon from './Icon'
 import Reveal from './Reveal'
+
+/** The whole hero is one (large) pane of frosted glass. */
+const heroCardSx: SxProps<Theme> = {
+  p: 'clamp(32px, 5vw, 56px)',
+  display: 'flex',
+  alignItems: 'center',
+  gap: 'clamp(28px, 5vw, 56px)',
+  '@media (max-width:820px)': {
+    flexDirection: 'column-reverse',
+    alignItems: 'flex-start',
+  },
+}
+
+const nameSx: SxProps<Theme> = {
+  backgroundImage: `linear-gradient(120deg, #fff 30%, ${accents.a} 70%, ${accents.b})`,
+  WebkitBackgroundClip: 'text',
+  backgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+}
+
+const badgeSx: SxProps<Theme> = {
+  flexShrink: 0,
+  width: 132,
+  height: 132,
+  borderRadius: '32px',
+  display: 'grid',
+  placeItems: 'center',
+  fontFamily: displayFont,
+  fontSize: 44,
+  fontWeight: 800,
+  color: 'primary.main',
+  background: `linear-gradient(135deg, ${alpha(accents.a, 0.16)}, ${alpha(accents.b, 0.16)})`,
+  border: `1px solid ${glassTokens.border}`,
+  boxShadow: `${glassTokens.inner}, 0 0 40px ${alpha(accents.a, 0.12)}`,
+  '@media (max-width:820px)': {
+    width: 96,
+    height: 96,
+    borderRadius: '24px',
+    fontSize: 34,
+  },
+}
 
 export default function Hero() {
   const email = contacts.find((contact) => contact.icon === 'mail')
 
   return (
-    <section id="home" className="hero">
-      <div className="container">
-        <Reveal className="hero-card glass">
-          <div className="hero-copy">
-            <p className="hero-greeting">Hello, I&rsquo;m</p>
-            <h1 className="hero-name">{profile.name}</h1>
-            <p className="hero-title">{profile.title}</p>
-            <p className="hero-summary">{profile.summary}</p>
+    <Box component="section" id="home" sx={{ pt: '96px', pb: '88px' }}>
+      <Container>
+        <Reveal component={Card} sx={heroCardSx}>
+          <Box sx={{ flex: 1, minWidth: 0 }}>
+            <Typography sx={{ color: 'text.secondary', fontSize: 15, mb: '8px' }}>
+              Hello, I’m
+            </Typography>
 
-            <div className="hero-ctas">
-              <a className="btn btn-primary" href="#projects">
+            <Typography variant="h1" sx={nameSx}>
+              {profile.name}
+            </Typography>
+
+            <Typography
+              sx={{
+                mt: '10px',
+                fontSize: 'clamp(16px, 2.2vw, 20px)',
+                fontWeight: 600,
+                color: 'text.secondary',
+              }}
+            >
+              {profile.title}
+            </Typography>
+
+            <Typography sx={{ mt: '18px', color: 'text.secondary', maxWidth: 560 }}>
+              {profile.summary}
+            </Typography>
+
+            <Stack
+              direction="row"
+              useFlexGap
+              spacing="14px"
+              sx={{ flexWrap: 'wrap', mt: '28px' }}
+            >
+              <Button
+                variant="contained"
+                href="#projects"
+                endIcon={<Icon name="arrow-right" size={17} />}
+              >
                 View projects
-                <Icon name="arrow-right" size={17} />
-              </a>
-              {email ? (
-                <a className="btn btn-ghost" href={email.href}>
-                  <Icon name="mail" size={17} />
-                  Email me
-                </a>
-              ) : null}
-            </div>
+              </Button>
 
-            <div className="hero-contacts">
+              {email ? (
+                <Button
+                  variant="outlined"
+                  href={email.href}
+                  startIcon={<Icon name="mail" size={17} />}
+                >
+                  Email me
+                </Button>
+              ) : null}
+            </Stack>
+
+            <Stack
+              direction="row"
+              useFlexGap
+              spacing="10px"
+              sx={{ flexWrap: 'wrap', mt: '28px' }}
+            >
               {contacts.map((contact) => (
-                <a
+                <Chip
                   key={contact.label}
-                  className="chip"
+                  component="a"
+                  clickable
                   href={contact.href}
                   title={`${contact.label}: ${contact.value}`}
+                  icon={<Icon name={contact.icon} size={15} />}
+                  label={contact.value}
                   {...externalLinkProps(contact.href)}
-                >
-                  <Icon name={contact.icon} size={15} />
-                  <span>{contact.value}</span>
-                </a>
+                />
               ))}
-            </div>
-          </div>
+            </Stack>
+          </Box>
 
-          <div className="hero-badge" aria-hidden="true">
+          <Box sx={badgeSx} aria-hidden>
             {profile.initials}
-          </div>
+          </Box>
         </Reveal>
-      </div>
-    </section>
+      </Container>
+    </Box>
   )
 }
+

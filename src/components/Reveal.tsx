@@ -1,20 +1,31 @@
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ElementType, type ReactNode } from 'react'
+import Box from '@mui/material/Box'
+import type { SxProps, Theme } from '@mui/material/styles'
 
 type RevealProps = {
   children: ReactNode
-  /** Extra classes to merge with `.reveal`. */
-  className?: string
+  /** Styles for the revealed element, e.g. `glassSurface({ hover: true })`. */
+  sx?: SxProps<Theme>
   /** Stagger the fade-in, in milliseconds. */
   delay?: number
+  /** Element or MUI component to render; defaults to a `div`. */
+  component?: ElementType
 }
 
 /**
- * Wraps content in a `.reveal` element and adds `.is-visible` once it scrolls
- * into view. The stylesheet already neutralises the animation under
+ * Wraps content in a `.reveal` element (see `theme/globalStyles.ts`) and adds
+ * `.is-visible` once it scrolls into view.
+ *
+ * The stylesheet already neutralises the animation under
  * `prefers-reduced-motion: reduce`, and we reveal immediately when
  * `IntersectionObserver` is unavailable so content is never left hidden.
  */
-export default function Reveal({ children, className = '', delay = 0 }: RevealProps) {
+export default function Reveal({
+  children,
+  sx,
+  delay = 0,
+  component = 'div',
+}: RevealProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
 
@@ -76,17 +87,16 @@ export default function Reveal({ children, className = '', delay = 0 }: RevealPr
     }
   }, [])
 
-  const classes = ['reveal', visible ? 'is-visible' : '', className]
-    .filter(Boolean)
-    .join(' ')
-
-  const style: CSSProperties | undefined = delay
-    ? { transitionDelay: `${delay}ms` }
-    : undefined
-
   return (
-    <div ref={ref} className={classes} style={style}>
+    <Box
+      ref={ref}
+      component={component}
+      className={visible ? 'reveal is-visible' : 'reveal'}
+      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+      sx={sx}
+    >
       {children}
-    </div>
+    </Box>
   )
 }
+
