@@ -16,7 +16,6 @@ export const profile = {
 
 export const contacts = [
   { label: 'Email', value: 'osamasamarrai@gmail.com', href: 'mailto:osamasamarrai@gmail.com', icon: 'mail' },
-  { label: 'Phone', value: '+34 644 642 147', href: 'tel:+34644642147', icon: 'phone' },
   { label: 'LinkedIn', value: 'in/osama-islam', href: 'https://www.linkedin.com/in/osama-islam-40441', icon: 'linkedin' },
   { label: 'GitHub', value: 'DevOsamaIslam', href: 'https://github.com/DevOsamaIslam', icon: 'github' },
 ] as const

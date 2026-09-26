@@ -4,7 +4,7 @@
 
 A seasoned MERN stack developer with a proven track record in spearheading agile projects. Committed to constant professional development and keen to leverage my skills in a vibrant, forward-thinking organization.
 
-[osamasamarrai@gmail.com](mailto:osamasamarrai@gmail.com) · [+34 644 642 147](tel:+34644642147) · [LinkedIn](https://www.linkedin.com/in/osama-islam-40441) · [GitHub](https://github.com/DevOsamaIslam)
+[osamasamarrai@gmail.com](mailto:osamasamarrai@gmail.com) · [LinkedIn](https://www.linkedin.com/in/osama-islam-40441) · [GitHub](https://github.com/DevOsamaIslam)
 
 ---
 
@@ -165,6 +165,5 @@ What I build with day to day, plus the habits that keep a team moving.
 Open to conversations about frontend architecture, agile delivery and anything MERN. Email is the fastest way to reach me.
 
 - 📧 [osamasamarrai@gmail.com](mailto:osamasamarrai@gmail.com)
-- 📞 [+34 644 642 147](tel:+34644642147)
 - 💼 [LinkedIn ↗](https://www.linkedin.com/in/osama-islam-40441)
 - 🐙 [GitHub ↗](https://github.com/DevOsamaIslam)

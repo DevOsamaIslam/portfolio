@@ -4,12 +4,10 @@ import GitHub from '@mui/icons-material/GitHub'
 import LinkedIn from '@mui/icons-material/LinkedIn'
 import MailOutlineRounded from '@mui/icons-material/MailOutlineRounded'
 import OpenInNewRounded from '@mui/icons-material/OpenInNewRounded'
-import PhoneRounded from '@mui/icons-material/PhoneRounded'
 import type { SvgIconProps } from '@mui/material/SvgIcon'
 
 export type IconName =
   | 'mail'
-  | 'phone'
   | 'linkedin'
   | 'github'
   | 'external'
@@ -18,7 +16,6 @@ export type IconName =
 /** String key -> `@mui/icons-material` component, so `data/cv.ts` stays declarative. */
 const icons: Record<IconName, ElementType<SvgIconProps>> = {
   mail: MailOutlineRounded,
-  phone: PhoneRounded,
   linkedin: LinkedIn,
   github: GitHub,
   external: OpenInNewRounded,
