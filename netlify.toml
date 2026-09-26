@@ -1,0 +1,34 @@
+# Netlify build configuration for this Vite + React (MUI) portfolio.
+#
+# Committing this file matters: [build] settings here OVERRIDE whatever the
+# Netlify UI has saved. Without it the UI had to be configured by hand, and a
+# publish directory of "public" (which only holds favicon.svg) or a missing
+# build command (so the gitignored dist/ folder never exists) both produce a
+# deploy that serves "Page not found" instead of the site.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Vite 5 supports Node 18/20/22. Pin one so the build image never drifts.
+[build.environment]
+  NODE_VERSION = "22"
+
+# Vite emits content-hashed filenames under /assets, so they can be cached
+# forever. The HTML entry point must always be revalidated so new deploys are
+# picked up instead of serving a stale bundle reference.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Lets `netlify dev` proxy to the Vite dev server.
+[dev]
+  command = "npm run dev"
+  targetPort = 5173
+  framework = "#custom"
