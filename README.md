@@ -172,20 +172,21 @@ Open to conversations about frontend architecture, agile delivery and anything M
 
 ## Localization
 
-The site ships in **English** and **Spanish** at runtime — no i18n library, no extra routes, no duplicated markup. Switching is instant and only the copy changes; layout, icons and links are shared.
+The site ships in **English**, **Spanish** and **Arabic** at runtime — no i18n library, no extra routes, no duplicated markup. Switching is instant and only the copy changes; layout, icons and links are shared.
 
 ### Supported locales
 
-| Code | Language | Switcher pill | `<html lang>` |
-| ---- | -------- | ------------- | ------------- |
-| `en` | English  | `EN`          | `en`          |
-| `es` | Español  | `ES`          | `es`          |
+| Code | Language | Switcher pill | `<html lang>` | `<html dir>` |
+| ---- | -------- | ------------- | ------------- | ------------ |
+| `en` | English  | `EN`          | `en`          | `ltr`        |
+| `es` | Español  | `ES`          | `es`          | `ltr`        |
+| `ar` | العربية  | `AR`          | `ar`          | `rtl`        |
 
 English is the authoring language and the fallback. Each locale supplies both halves of its content:
 
 | File                   | Holds                                                                                                           |
 | ---------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `src/i18n/locales.ts`  | The locale list itself, plus each language's label, short code and BCP-47 tag, and the resolution logic         |
+| `src/i18n/locales.ts`  | The locale list itself, plus each language's label, short code, BCP-47 tag and writing direction, and the resolution logic |
 | `src/i18n/messages.ts` | UI chrome — nav, headings, buttons, kickers, stat labels, screen-reader strings, `<title>` and meta description |
 | `src/data/cv.ts`       | Narrative CV content — experience, projects, skills, certificates, education                                    |
 
@@ -197,12 +198,31 @@ const { locale, setLocale, t, cv } = useI18n()
 
 In the navbar switcher each option is labelled in its own language (a Spanish speaker looks for "Español"), while the group's accessible name follows the active locale.
 
+### Right-to-left (Arabic)
+
+Arabic is laid out right-to-left, so `localeMeta` carries a `direction` per language and the app shell is built around it. Three things change together, all derived from the same locale:
+
+| Piece                                   | What it does                                                                                                                       |
+| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `<html dir>` / `<html lang>`            | Set by `I18nProvider` in a **layout** effect, so the first painted frame is already RTL. This is what flips flex rows, text alignment and scrollbars. |
+| `theme.direction`                       | `AppThemeProvider` builds the theme with `createAppTheme(direction)`; MUI reads it for direction-aware component internals (Button icon slots, `MenuList` key handling). |
+| Emotion cache (`src/theme/rtlCache.ts`) | One cache per direction. The RTL cache runs `stylis-plugin-rtl` (cssjanus), so the CSS MUI generates from `sx`, theme `styleOverrides` and `GlobalStyles` is mirrored automatically. |
+
+Because the caches use different `key`s (`muiltr` / `muirtl`), the generated class names are prefixed per cache — switching direction cannot leak a stale rule from the other stylesheet, and no markup is duplicated. `prefixer` is listed explicitly in `stylisPlugins` because supplying that option replaces Emotion's defaults rather than extending them.
+
+What the stylis plugin handles for free: `left`/`right`, `margin-*`, `padding-*`, `border-*`, `text-align`, `float`, `background-position`, and the X sign of `translate`/`translateX`. It also **does not** touch `scaleX`, which is what `Icon`'s `rtlFlip` prop uses to mirror directional glyphs (the hero's arrow) without double-flipping.
+
+Two things are deliberately script-specific rather than mirrored:
+
+- **Arabic type** — the font stacks fall back to `Cairo` before `system-ui`, so Arabic copy renders in a face drawn for the script while Latin copy keeps Sora/Inter (fallback is per glyph, so one stack serves every locale). Headings also get looser leading (`1.45` vs `1.25`).
+- **No tracking, no case** — kickers and the "Live" flag drop `letter-spacing` and `text-transform` when `theme.direction === 'rtl'`: Arabic has no letter case, and tracking pulls its joined letters apart.
+
 ### Language resolution
 
 On first render the active language is resolved in this order:
 
 1. **Saved choice** — `localStorage` key `osama-portfolio:locale`, written every time a visitor picks a language.
-2. **Browser language** — the first of `navigator.languages` whose primary subtag is supported, so `es-419` and `es-ES` both resolve to `es`, and `en-GB` resolves to `en`. Falls back to the single `navigator.language` value when `navigator.languages` is empty.
+2. **Browser language** — the first of `navigator.languages` whose primary subtag is supported, so `es-419`, `es-ES`, `ar-EG` and `en-GB` all resolve to their base language. Falls back to the single `navigator.language` value when `navigator.languages` is empty.
 3. **English** — `DEFAULT_LOCALE`.
 
 Both storage reads are wrapped in `try/catch`, so when storage is unavailable (private mode, blocked cookies) the site still works — the choice simply does not survive a reload.
@@ -213,11 +233,12 @@ To reset a visitor to step 2, clear the key in DevTools → Application → Loca
 
 Because both copy files are `Record<Locale, …>`, a half-finished language cannot ship: the TypeScript build fails until every string exists.
 
-1. Add the code to `LOCALES` in `src/i18n/locales.ts` and its entry to `localeMeta` (in-language `label`, `short` pill text, BCP-47 `tag`).
+1. Add the code to `LOCALES` in `src/i18n/locales.ts` and its entry to `localeMeta` (in-language `label`, `short` pill text, BCP-47 `tag`, and `direction` — `'rtl'` is all a right-to-left language needs; the theme, cache and `<html dir>` follow from it).
 2. Add the complete `Messages` object for it in `src/i18n/messages.ts`, including the `meta` title and description.
 3. Add the complete `Cv` object for it in `src/data/cv.ts`.
+4. When the language uses a script the Latin fonts do not cover, add its web font to the `<link>` in `index.html` and to the stacks in `src/theme/theme.ts` — **before** `system-ui`, so the fallback wins over whatever the platform ships.
 
-The switcher renders one segment per entry in `LOCALES`, so no component changes are needed. Verify with `npx tsc --noEmit` and `npm run build`.
+The switcher renders one segment per entry in `LOCALES`, so no component changes are needed. Verify with `npx tsc --noEmit` and `npm run build`, then switch to the language in a browser and confirm `<html dir>`, mirrored padding (e.g. the experience timeline rail sits on the right in RTL) and that directional icons point the right way.
 
 ### Client-side only — known limitation
 

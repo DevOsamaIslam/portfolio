@@ -2,7 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -47,9 +47,10 @@ export function useI18n(): I18nContextValue {
 
 /**
  * Owns the active language: resolves the initial locale (saved choice →
- * browser language → English), persists changes, and keeps the document
- * metadata in step with what is rendered. `index.html` keeps the English
- * values as the first-paint default, which this effect then updates.
+ * browser language → English), persists changes, and keeps the document in step
+ * with what is rendered — `lang`, `dir`, `<title>` and the meta description.
+ * `index.html` keeps the English/LTR values as the first-paint default, which
+ * this effect then updates.
  */
 export default function I18nProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(detectLocale)
@@ -65,10 +66,17 @@ export default function I18nProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  useEffect(() => {
+  // A layout effect, not a passive one: `dir` must be on <html> in the same
+  // commit that mounts the RTL theme and cache, otherwise the first frame is
+  // laid out left-to-right with right-to-left margins.
+  useLayoutEffect(() => {
     const { title, description } = messagesByLocale[locale].meta
+    const { tag, direction } = localeMeta[locale]
 
-    document.documentElement.lang = localeMeta[locale].tag
+    document.documentElement.lang = tag
+    // Inherited by the whole document, so it is what flips flex rows, text
+    // alignment and scrollbars for Arabic.
+    document.documentElement.dir = direction
     document.title = title
     document.head
       .querySelector('meta[name="description"]')

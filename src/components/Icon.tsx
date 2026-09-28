@@ -5,6 +5,7 @@ import LinkedIn from '@mui/icons-material/LinkedIn'
 import MailOutlineRounded from '@mui/icons-material/MailOutlineRounded'
 import OpenInNewRounded from '@mui/icons-material/OpenInNewRounded'
 import type { SvgIconProps } from '@mui/material/SvgIcon'
+import { useTheme } from '@mui/material/styles'
 
 export type IconName =
   | 'mail'
@@ -26,21 +27,34 @@ type IconProps = Omit<SvgIconProps, 'children' | 'sx'> & {
   name: IconName
   /** Icon size in px; mapped to `fontSize` so it scales with the surrounding text. */
   size?: number
+  /**
+   * Mirror the glyph in right-to-left layouts. Only for *directional* icons
+   * (an arrow meaning "onwards"), which would otherwise point the wrong way.
+   */
+  rtlFlip?: boolean
 }
 
 /**
  * Thin wrapper over the MUI icon set that keeps the string-keyed icon API the
  * content layer already uses. Icons inherit `currentColor` and are decorative
  * by default, so a text label is never announced twice by a screen reader.
+ *
+ * `rtlFlip` mirrors the glyph with `scaleX(-1)`. The stylis plugin in
+ * `rtlCache.ts` deliberately leaves `scaleX` alone — it only negates the X
+ * offset of `translate` — so the mirror survives the RTL cache.
  */
-export default function Icon({ name, size = 18, ...rest }: IconProps) {
+export default function Icon({ name, size = 18, rtlFlip = false, ...rest }: IconProps) {
+  const { direction } = useTheme()
   const IconComponent = icons[name]
 
   return (
     <IconComponent
       aria-hidden
       focusable="false"
-      sx={{ fontSize: size }}
+      sx={{
+        fontSize: size,
+        ...(rtlFlip && direction === 'rtl' && { transform: 'scaleX(-1)' }),
+      }}
       {...rest}
     />
   )

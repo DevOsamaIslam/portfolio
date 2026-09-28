@@ -133,15 +133,16 @@ export default function Projects() {
               >
                 <Typography
                   component="span"
-                  sx={{
+                  sx={(theme) => ({
                     display: 'inline-block',
                     fontSize: 11,
                     fontWeight: 700,
-                    letterSpacing: '0.12em',
-                    textTransform: 'uppercase',
+                    // See SectionHead: no case or tracking in Arabic script.
+                    letterSpacing: theme.direction === 'rtl' ? 0 : '0.12em',
+                    textTransform: theme.direction === 'rtl' ? 'none' : 'uppercase',
                     color: 'warning.main',
                     mb: '10px',
-                  }}
+                  })}
                 >
                   {t.projects.live}
                 </Typography>

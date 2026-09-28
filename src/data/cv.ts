@@ -228,11 +228,18 @@ const profileCopy: Record<Locale, Pick<Cv, 'title' | 'summary'>> = {
       'Comprometido con el desarrollo profesional continuo y con ganas de aportar mis habilidades ' +
       'a una organización dinámica y con visión de futuro.',
   },
+  ar: {
+    title: 'سكرام ماستر أول ومطوّر واجهات أمامية',
+    summary:
+      'مطوّر متمرس في منظومة MERN بسجل موثوق في قيادة المشاريع الرشيقة. ' +
+      'ملتزم بالتطوير المهني المستمر ومتشوّق لتوظيف مهاراتي في مؤسسة نابضة وطموحة.',
+  },
 }
 
 const contactLabelCopy: Record<Locale, Record<ContactKey, string>> = {
   en: { mail: 'Email', linkedin: 'LinkedIn', github: 'GitHub' },
   es: { mail: 'Correo', linkedin: 'LinkedIn', github: 'GitHub' },
+  ar: { mail: 'البريد', linkedin: 'LinkedIn', github: 'GitHub' },
 }
 
 type JobCopy = {
@@ -291,6 +298,30 @@ const jobCopy: Record<Locale, Record<JobId, JobCopy>> = {
       ],
     },
   },
+  ar: {
+    mbl: {
+      role: 'مطوّر واجهات أمامية أول',
+      period: 'مارس 2022 — نوفمبر 2025',
+      location: 'قبرص',
+      points: [
+        'قدت تطبيق منهجيات أجايل بصفتي سكرام ماستر، فارتفعت كفاءة التسليم لدى الفريق.',
+        'أدرت تطوير برمجيات CRM في أكثر من 3 مشاريع، من التصميم المعماري حتى الإطلاق.',
+        'نقلت مشاريع قديمة إلى تقنيات أحدث وأكثر كفاءة دون أي توقف في الخدمة.',
+        'راجعت الشيفرة لضمان الجودة والاتساق والالتزام بأفضل الممارسات.',
+        'أنشأت هياكل مشاريع تركّز على قابلية التوسع والصيانة على المدى الطويل.',
+      ],
+    },
+    tsystems: {
+      role: 'مهندس أنظمة',
+      period: 'يونيو 2018 — يناير 2021',
+      location: 'ماليزيا',
+      points: [
+        'عملت حلقة الوصل بين الإدارة والفريق الهندسي.',
+        'بنيت عمليات أتمتة وبرامج روبوتية لتقارير INM والتقارير المجمّعة.',
+        'طبّقت المعالجة الدُفعية للأحداث، مما قلّل العمل اليدوي على فريق العمليات.',
+      ],
+    },
+  },
 }
 
 const projectCopy: Record<Locale, Record<ProjectId, string>> = {
@@ -326,6 +357,22 @@ const projectCopy: Record<Locale, Record<ProjectId, string>> = {
     apologea:
       'Producto web full-stack, en producción y en vivo: el proyecto insignia de mi trabajo independiente.',
   },
+  ar: {
+    useSmartValue:
+      'خطّاف React مخصّص يوحّد useState و useRef خلف واجهة برمجية واحدة سهلة الاستخدام.',
+    useFilters:
+      'خطّاف React يدير حالات تصفية معقّدة ومعاملات استعلام متزامنة مع عنوان URL.',
+    muiCustomForm:
+      'مكوّن نموذج تصريحي يجمع بين MUI والتحقق عبر react-hook-form.',
+    asyncHandler:
+      'أداة TypeScript تتناول الأخطاء المتزامنة وغير المتزامنة بأناقة داخل غلاف واحد.',
+    tradingBot:
+      'روبوت تداول بلغة Node.js يستخدم KuCoin SDK مع مؤشرات فنية واختبار خلفي.',
+    powBlockchain:
+      'سلسلة كتل بإثبات العمل مبنية من الصفر بلغة TypeScript معيارية.',
+    apologea:
+      'منتج ويب متكامل، قيد التشغيل وفي الإنتاج — المشروع الأبرز في عملي المستقل.',
+  },
 }
 
 const skillGroupCopy: Record<Locale, Record<SkillGroupId, string>> = {
@@ -340,6 +387,12 @@ const skillGroupCopy: Record<Locale, Record<SkillGroupId, string>> = {
     backend: 'Backend',
     testing: 'Pruebas y calidad',
     practices: 'Prácticas y herramientas',
+  },
+  ar: {
+    frontend: 'الواجهة الأمامية',
+    backend: 'الخلفية',
+    testing: 'الاختبارات والجودة',
+    practices: 'الممارسات والأدوات',
   },
 }
 
@@ -357,6 +410,13 @@ const educationCopy: Record<Locale, Record<EducationId, { degree: string; place:
       place: 'Malasia',
     },
     spanish: { degree: 'Nivel C1 de Español', place: 'España' },
+  },
+  ar: {
+    bsc: {
+      degree: 'بكالوريوس (مع مرتبة الشرف) في هندسة البرمجيات مع الوسائط المتعددة',
+      place: 'ماليزيا',
+    },
+    spanish: { degree: 'مستوى C1 في اللغة الإسبانية', place: 'إسبانيا' },
   },
 }
 
@@ -389,6 +449,20 @@ const softSkillCopy: Record<Locale, readonly string[]> = {
     'Resolución de problemas',
     'Gestión de tareas',
   ],
+  ar: [
+    'القيادة',
+    'تنسيق الفرق',
+    'الإرشاد والتوجيه',
+    'تحسين استخدام الموارد',
+    'تنقيح الأخطاء',
+    'التحليلات',
+    'التواصل',
+    'العمل المستقل',
+    'ضمان الجودة',
+    'سرعة التعلّم',
+    'حل المشكلات',
+    'إدارة المهام',
+  ],
 }
 
 const languageCopy: Record<Locale, readonly LanguageEntry[]> = {
@@ -401,6 +475,11 @@ const languageCopy: Record<Locale, readonly LanguageEntry[]> = {
     { name: 'Árabe', level: 'Nativo' },
     { name: 'Inglés', level: 'Empresarial' },
     { name: 'Español', level: 'Intermedio' },
+  ],
+  ar: [
+    { name: 'العربية', level: 'اللغة الأم' },
+    { name: 'الإنجليزية', level: 'احترافية' },
+    { name: 'الإسبانية', level: 'متوسطة' },
   ],
 }
 
@@ -430,4 +509,5 @@ const buildCv = (locale: Locale): Cv => ({
 export const cvByLocale: Record<Locale, Cv> = {
   en: buildCv('en'),
   es: buildCv('es'),
+  ar: buildCv('ar'),
 }

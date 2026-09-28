@@ -98,7 +98,7 @@ export default function Hero() {
               <Button
                 variant="contained"
                 href="#projects"
-                endIcon={<Icon name="arrow-right" size={17} />}
+                endIcon={<Icon name="arrow-right" size={17} rtlFlip />}
               >
                 {t.hero.viewProjects}
               </Button>

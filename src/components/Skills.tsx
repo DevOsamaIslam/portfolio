@@ -41,12 +41,13 @@ export default function Skills() {
             >
               <Typography
                 variant="h3"
-                sx={{
+                sx={(theme) => ({
                   fontSize: 15,
                   fontWeight: 700,
-                  letterSpacing: '0.02em',
+                  // Tracking breaks the joining script; see SectionHead.
+                  letterSpacing: theme.direction === 'rtl' ? 0 : '0.02em',
                   mb: '14px',
-                }}
+                })}
               >
                 {group.category}
               </Typography>
@@ -63,12 +64,12 @@ export default function Skills() {
         <Reveal>
           <Typography
             variant="h3"
-            sx={{
+            sx={(theme) => ({
               margin: '34px 0 0',
               fontSize: 15,
               fontWeight: 700,
-              letterSpacing: '0.02em',
-            }}
+              letterSpacing: theme.direction === 'rtl' ? 0 : '0.02em',
+            })}
           >
             {t.skills.waysOfWorking}
           </Typography>

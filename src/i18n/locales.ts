@@ -2,16 +2,23 @@
  * Supported locales and the metadata the language switcher renders.
  *
  * Adding a language is a three-step change:
- *   1. add its code below,
+ *   1. add its code below (with its writing direction),
  *   2. add its UI copy to `messages.ts`,
  *   3. add its CV copy to `data/cv.ts`.
  * Both files are typed `Record<Locale, …>`, so the build fails until all three
  * are done — a language can never half-ship.
  */
 
-export const LOCALES = ['en', 'es'] as const
+export const LOCALES = ['en', 'es', 'ar'] as const
 
 export type Locale = (typeof LOCALES)[number]
+
+/**
+ * Writing direction a language is laid out in. Drives `<html dir>`,
+ * `theme.direction` and which Emotion cache (and therefore which stylesheet)
+ * MUI renders into — see `theme/rtlCache.ts`.
+ */
+export type Direction = 'ltr' | 'rtl'
 
 /** The language the page is authored in and falls back to. */
 export const DEFAULT_LOCALE: Locale = 'en'
@@ -26,11 +33,14 @@ type LocaleMeta = {
   readonly short: string
   /** BCP-47 tag written to `<html lang>`. */
   readonly tag: string
+  /** Whether the language reads left-to-right or right-to-left. */
+  readonly direction: Direction
 }
 
 export const localeMeta: Record<Locale, LocaleMeta> = {
-  en: { label: 'English', short: 'EN', tag: 'en' },
-  es: { label: 'Español', short: 'ES', tag: 'es' },
+  en: { label: 'English', short: 'EN', tag: 'en', direction: 'ltr' },
+  es: { label: 'Español', short: 'ES', tag: 'es', direction: 'ltr' },
+  ar: { label: 'العربية', short: 'AR', tag: 'ar', direction: 'rtl' },
 }
 
 /** Narrows an arbitrary string (e.g. from storage) to a supported locale. */

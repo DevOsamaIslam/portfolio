@@ -1,5 +1,7 @@
 import { alpha, createTheme } from '@mui/material/styles'
+import type { ThemeOptions } from '@mui/material/styles'
 
+import type { Direction } from '../i18n/locales'
 import { accents, glassBase, glassTokens } from './glass'
 
 /* ------------------------------------------------------------------ *
@@ -10,9 +12,16 @@ import { accents, glassBase, glassTokens } from './glass'
  * rather than a redesign.
  * ------------------------------------------------------------------ */
 
-/** Display + body stacks, loaded via the Google Fonts link in `index.html`. */
-export const displayFont = "'Sora', 'Inter', system-ui, sans-serif"
-export const bodyFont = "'Inter', system-ui, -apple-system, sans-serif"
+/**
+ * Display + body stacks, loaded via the Google Fonts link in `index.html`.
+ *
+ * `Cairo` sits before `system-ui` so Arabic copy — which neither Sora nor Inter
+ * covers — falls back to a face drawn for the script instead of to whatever the
+ * platform happens to ship, while Latin copy keeps its own face. Fallback is
+ * per glyph, so a single stack serves every locale.
+ */
+export const displayFont = "'Sora', 'Inter', 'Cairo', system-ui, sans-serif"
+export const bodyFont = "'Inter', 'Cairo', system-ui, -apple-system, sans-serif"
 
 const accentA = accents.a
 const accentB = accents.b
@@ -26,7 +35,53 @@ const textLow = 'rgba(255, 255, 255, 0.50)'
 export const contentWidth = 1120
 export const gutter = 24
 
-const theme = createTheme({
+/**
+ * The type scale for a writing direction.
+ *
+ * Arabic ascenders, descenders and diacritics need noticeably more leading than
+ * the Latin display face at the same size, so only `lineHeight` differs.
+ */
+function typographyFor(direction: Direction) {
+  const headingLineHeight = direction === 'rtl' ? 1.45 : 1.25
+
+  return {
+    fontFamily: bodyFont,
+    h1: {
+      fontFamily: displayFont,
+      fontWeight: 800,
+      fontSize: 'clamp(34px, 5.5vw, 54px)',
+      lineHeight: headingLineHeight,
+    },
+    h2: {
+      fontFamily: displayFont,
+      fontWeight: 700,
+      fontSize: 'clamp(26px, 4vw, 36px)',
+      lineHeight: headingLineHeight,
+    },
+    h3: {
+      fontFamily: displayFont,
+      fontWeight: 700,
+      fontSize: '1.5rem',
+      lineHeight: headingLineHeight,
+    },
+    h4: {
+      fontFamily: displayFont,
+      fontWeight: 700,
+      fontSize: '1.25rem',
+      lineHeight: headingLineHeight,
+    },
+    body1: { lineHeight: 1.6 },
+    button: { textTransform: 'none', fontWeight: 600 },
+  }
+}
+
+/**
+ * Everything in the theme that does **not** depend on the writing direction.
+ * All physical properties (margins, paddings, borders, `left`/`right`) live here
+ * in their left-to-right form: the stylis plugin in `rtlCache.ts` mirrors them
+ * for RTL, so they must not be forked by hand.
+ */
+const themeOptions: ThemeOptions = {
   palette: {
     mode: 'dark',
     primary: { main: accentA },
@@ -43,25 +98,8 @@ const theme = createTheme({
 
   shape: { borderRadius: glassTokens.radius },
 
-  typography: {
-    fontFamily: bodyFont,
-    h1: {
-      fontFamily: displayFont,
-      fontWeight: 800,
-      fontSize: 'clamp(34px, 5.5vw, 54px)',
-      lineHeight: 1.25,
-    },
-    h2: {
-      fontFamily: displayFont,
-      fontWeight: 700,
-      fontSize: 'clamp(26px, 4vw, 36px)',
-      lineHeight: 1.25,
-    },
-    h3: { fontFamily: displayFont, fontWeight: 700, fontSize: '1.5rem', lineHeight: 1.25 },
-    h4: { fontFamily: displayFont, fontWeight: 700, fontSize: '1.25rem', lineHeight: 1.25 },
-    body1: { lineHeight: 1.6 },
-    button: { textTransform: 'none', fontWeight: 600 },
-  },
+  // No `typography` here: the type scale is the one part of the theme that
+  // depends on the direction, so `createAppTheme` always sets it.
 
   components: {
     /* Every <Card> is a pane of frosted glass. */
@@ -187,6 +225,19 @@ const theme = createTheme({
       styleOverrides: { root: { color: 'inherit' } },
     },
   },
-})
+}
 
-export default theme
+/**
+ * The theme for a writing direction. `direction` is what MUI reads for
+ * direction-aware component internals (Button icon slots, `MenuList` key
+ * handling), and what `sx` callbacks read to opt a rule out of mirroring.
+ * Physical properties are mirrored wholesale by the stylis plugin, so only
+ * genuinely script-specific choices belong in the factory.
+ */
+export function createAppTheme(direction: Direction = 'ltr') {
+  return createTheme({
+    ...themeOptions,
+    direction,
+    typography: typographyFor(direction),
+  })
+}

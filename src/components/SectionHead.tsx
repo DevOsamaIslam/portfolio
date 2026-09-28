@@ -21,15 +21,17 @@ export default function SectionHead({ kicker, title, sub }: SectionHeadProps) {
       <Box sx={{ mb: '40px' }}>
         <Typography
           component="span"
-          sx={{
+          sx={(theme) => ({
             display: 'inline-block',
             fontSize: 12,
             fontWeight: 600,
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
+            // Arabic has no letter case, and tracking pulls its joined letters
+            // apart, so both flourishes are dropped for RTL.
+            letterSpacing: theme.direction === 'rtl' ? 0 : '0.14em',
+            textTransform: theme.direction === 'rtl' ? 'none' : 'uppercase',
             color: 'primary.main',
             mb: '10px',
-          }}
+          })}
         >
           {kicker}
         </Typography>
