@@ -86,9 +86,9 @@ export type Messages = {
 export const messages: Record<Locale, Messages> = {
   en: {
     meta: {
-      title: 'Osama Samarrai — Sr. Scrum Master & Frontend Developer',
+      title: 'Osama Samarrai — Sr. Scrum Master & Full Stack Developer',
       description:
-        'Osama Samarrai — Sr. Scrum Master & Frontend Developer. 7+ years building MERN stack products, leading agile teams, and shipping maintainable software.',
+        'Osama Samarrai — Sr. Scrum Master & Full Stack Developer. 7+ years building full-stack MERN products, leading agile teams, and shipping maintainable software.',
     },
 
     a11y: { primaryNav: 'Primary', language: 'Language' },
@@ -129,7 +129,7 @@ export const messages: Record<Locale, Messages> = {
     projects: {
       kicker: 'Projects',
       title: 'Things I’ve built',
-      sub: 'A live product plus the open-source hooks and utilities I reach for in my own work. Every card links out to the running site or the source.',
+      sub: 'A live full-stack product, plus the open-source hooks, utilities and Node.js projects I reach for in my own work. Every card links out to the running site or the source.',
       live: 'Live',
       visit: 'Visit the site',
       source: 'View source',
@@ -153,15 +153,15 @@ export const messages: Record<Locale, Messages> = {
 
     contact: {
       title: 'Let’s talk',
-      body: 'Open to conversations about frontend architecture, agile delivery and anything MERN. Email is the fastest way to reach me.',
+      body: 'Open to conversations about full-stack architecture, agile delivery and anything MERN. Email is the fastest way to reach me.',
     },
   },
 
   es: {
     meta: {
-      title: 'Osama Samarrai — Scrum Master Senior y Desarrollador Frontend',
+      title: 'Osama Samarrai — Scrum Master Senior y Desarrollador Full Stack',
       description:
-        'Osama Samarrai — Scrum Master Senior y Desarrollador Frontend. Más de 7 años creando productos con el stack MERN, liderando equipos ágiles y entregando software mantenible.',
+        'Osama Samarrai — Scrum Master Senior y Desarrollador Full Stack. Más de 7 años creando productos full-stack con el stack MERN, liderando equipos ágiles y entregando software mantenible.',
     },
 
     a11y: { primaryNav: 'Principal', language: 'Idioma' },
@@ -202,7 +202,7 @@ export const messages: Record<Locale, Messages> = {
     projects: {
       kicker: 'Proyectos',
       title: 'Cosas que he construido',
-      sub: 'Un producto en producción y los hooks y utilidades de código abierto que uso en mi día a día. Cada tarjeta enlaza al sitio en funcionamiento o al código fuente.',
+      sub: 'Un producto full-stack en vivo, más los hooks, utilidades y proyectos de Node.js de código abierto que uso en mi día a día. Cada tarjeta enlaza al sitio en funcionamiento o al código fuente.',
       live: 'En vivo',
       visit: 'Visitar el sitio',
       source: 'Ver código',
@@ -226,15 +226,15 @@ export const messages: Record<Locale, Messages> = {
 
     contact: {
       title: 'Hablemos',
-      body: 'Abierto a conversaciones sobre arquitectura frontend, entrega ágil y cualquier tema relacionado con MERN. El correo es la vía más rápida para contactarme.',
+      body: 'Abierto a conversaciones sobre arquitectura full-stack, entrega ágil y cualquier tema relacionado con MERN. El correo es la vía más rápida para contactarme.',
     },
   },
 
   ar: {
     meta: {
-      title: 'أسامة السمرائي — سكرام ماستر أول ومطوّر واجهات أمامية',
+      title: 'أسامة السامرائي — Scrum Master ومطوّر Full Stack',
       description:
-        'أسامة السمرائي — سكرام ماستر أول ومطوّر واجهات أمامية. أكثر من 7 سنوات في بناء منتجات بمنظومة MERN، وقيادة فرق أجايل، وتسليم برمجيات قابلة للصيانة.',
+        'أسامة السمرائي — Scrum Master ومطوّر Full Stack. أكثر من 7 سنوات في بناء منتجات Full Stack بمنظومة MERN، وقيادة فرق Agile، وتسليم برمجيات قابلة للصيانة.',
     },
 
     a11y: { primaryNav: 'التنقل الرئيسي', language: 'اللغة' },
@@ -257,7 +257,7 @@ export const messages: Record<Locale, Messages> = {
 
     about: {
       kicker: 'نبذة',
-      title: 'برمجيات تُسلَّم بأسلوب أجايل',
+      title: 'برمجيات تُسلَّم بأسلوب Agile',
       stats: {
         years: 'سنوات من الخبرة',
         roles: 'أدوار هندسية عليا',
@@ -269,13 +269,13 @@ export const messages: Record<Locale, Messages> = {
     experience: {
       kicker: 'الخبرة',
       title: 'أين عملت',
-      sub: 'سبع سنوات من الخبرة المتراكمة في قطاع تقنية المعلومات: ثلاث سنوات في ITIL وأربع سنوات في تطوير الويب، بين تسليم منتجات CRM وإدارة طقوس أجايل التي تُبقي التسليم متوقعًا.',
+      sub: 'سبع سنوات من الخبرة المتراكمة في قطاع تقنية المعلومات: ثلاث سنوات في ITIL وأربع سنوات في تطوير الويب، بين تسليم منتجات CRM وإدارة اجتماعات Agile التي تُبقي التسليم متوقعًا.',
     },
 
     projects: {
       kicker: 'المشاريع',
       title: 'أشياء بنيتها',
-      sub: 'منتج حقيقي قيد التشغيل، إضافة إلى الحُزم والأدوات مفتوحة المصدر التي أعتمد عليها في عملي. كل بطاقة تنقلك إلى الموقع العامل أو إلى الشيفرة المصدرية.',
+      sub: 'منتج Full Stack يعمل فعليًا، إضافة إلى الحُزم والأدوات ومشاريع Node.js مفتوحة المصدر التي أعتمد عليها في عملي. كل بطاقة تنقلك إلى الموقع العامل أو إلى الشيفرة المصدرية.',
       live: 'قيد التشغيل',
       visit: 'زيارة الموقع',
       source: 'عرض الشيفرة',
@@ -299,7 +299,7 @@ export const messages: Record<Locale, Messages> = {
 
     contact: {
       title: 'لنتحدّث',
-      body: 'يسعدني الحديث عن هندسة الواجهات الأمامية، والتسليم بأسلوب أجايل، وأي موضوع يتعلق بمنظومة MERN. البريد الإلكتروني هو أسرع وسيلة للوصول إليّ.',
+      body: 'يسعدني الحديث عن هندسة Full Stack، والتسليم بأسلوب Agile، وأي موضوع يتعلق بمنظومة MERN. البريد الإلكتروني هو أسرع وسيلة للوصول إليّ.',
     },
   },
 }

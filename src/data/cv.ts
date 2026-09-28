@@ -215,24 +215,24 @@ export type Cv = {
 
 const profileCopy: Record<Locale, Pick<Cv, 'title' | 'summary'>> = {
   en: {
-    title: 'Sr. Scrum Master & Frontend Developer',
+    title: 'Sr. Scrum Master & Full Stack Developer',
     summary:
-      'A seasoned MERN stack developer with a proven track record in spearheading agile projects. ' +
+      'A seasoned full-stack developer on the MERN stack with a proven track record in spearheading agile projects. ' +
       'Committed to constant professional development and keen to leverage my skills in a vibrant, ' +
       'forward-thinking organization.',
   },
   es: {
-    title: 'Scrum Master Senior y Desarrollador Frontend',
+    title: 'Scrum Master y Desarrollador Full Stack Senior',
     summary:
-      'Desarrollador del stack MERN con amplia experiencia liderando proyectos ágiles. ' +
+      'Desarrollador full-stack del stack MERN con amplia experiencia liderando proyectos ágiles. ' +
       'Comprometido con el desarrollo profesional continuo y con ganas de aportar mis habilidades ' +
       'a una organización dinámica y con visión de futuro.',
   },
   ar: {
-    title: 'سكرام ماستر أول ومطوّر واجهات أمامية',
+    title: 'Scrum Master ومطوّر Full Stack',
     summary:
-      'مطوّر متمرس في منظومة MERN بسجل موثوق في قيادة المشاريع الرشيقة. ' +
-      'ملتزم بالتطوير المهني المستمر ومتشوّق لتوظيف مهاراتي في مؤسسة نابضة وطموحة.',
+      'مطوّر Full Stack في منظومة MERN بسجل موثوق في قيادة مشاريع Agile. ' +
+      'ملتزم بالتطوير المهني المستمر ومتشوّق لتوظيف مهاراتي في شركة طموحة وديناميكية.',
   },
 }
 
@@ -252,7 +252,7 @@ type JobCopy = {
 const jobCopy: Record<Locale, Record<JobId, JobCopy>> = {
   en: {
     mbl: {
-      role: 'Senior Frontend Developer',
+      role: 'Senior Full Stack Developer',
       period: 'March 2022 — November 2025',
       location: 'Cyprus',
       points: [
@@ -276,7 +276,7 @@ const jobCopy: Record<Locale, Record<JobId, JobCopy>> = {
   },
   es: {
     mbl: {
-      role: 'Desarrollador Frontend Senior',
+      role: 'Desarrollador Full Stack Senior',
       period: 'Marzo 2022 — Noviembre 2025',
       location: 'Chipre',
       points: [
@@ -300,12 +300,12 @@ const jobCopy: Record<Locale, Record<JobId, JobCopy>> = {
   },
   ar: {
     mbl: {
-      role: 'مطوّر واجهات أمامية أول',
+      role: 'مطوّر Full Stack',
       period: 'مارس 2022 — نوفمبر 2025',
       location: 'قبرص',
       points: [
-        'قدت تطبيق منهجيات أجايل بصفتي سكرام ماستر، فارتفعت كفاءة التسليم لدى الفريق.',
-        'أدرت تطوير برمجيات CRM في أكثر من 3 مشاريع، من التصميم المعماري حتى الإطلاق.',
+        'قدت تطبيق منهجيات Agile بصفتي Scrum Master، فارتفعت كفاءة التسليم لدى الفريق.',
+        'أدرت تطوير برمجيات CRM في أكثر من 3 مشاريع، من التصميم حتى الإطلاق.',
         'نقلت مشاريع قديمة إلى تقنيات أحدث وأكثر كفاءة دون أي توقف في الخدمة.',
         'راجعت الشيفرة لضمان الجودة والاتساق والالتزام بأفضل الممارسات.',
         'أنشأت هياكل مشاريع تركّز على قابلية التوسع والصيانة على المدى الطويل.',
@@ -316,9 +316,9 @@ const jobCopy: Record<Locale, Record<JobId, JobCopy>> = {
       period: 'يونيو 2018 — يناير 2021',
       location: 'ماليزيا',
       points: [
-        'عملت حلقة الوصل بين الإدارة والفريق الهندسي.',
+        'عملت كحلقة وصل بين الإدارة والفريق الهندسي.',
         'بنيت عمليات أتمتة وبرامج روبوتية لتقارير INM والتقارير المجمّعة.',
-        'طبّقت المعالجة الدُفعية للأحداث، مما قلّل العمل اليدوي على فريق العمليات.',
+        'طبّقت معالجة الأحداث على دفعات، مما قلّل العمل اليدوي على فريق العمليات.',
       ],
     },
   },
@@ -359,19 +359,19 @@ const projectCopy: Record<Locale, Record<ProjectId, string>> = {
   },
   ar: {
     useSmartValue:
-      'خطّاف React مخصّص يوحّد useState و useRef خلف واجهة برمجية واحدة سهلة الاستخدام.',
+      'React Hook مخصّص يوحّد useState و useRef خلف واجهة API واحدة سهلة الاستخدام.',
     useFilters:
-      'خطّاف React يدير حالات تصفية معقّدة ومعاملات استعلام متزامنة مع عنوان URL.',
+      'React Hook يدير حالات تصفية معقّدة ومعاملات استعلام متزامنة مع عنوان URL.',
     muiCustomForm:
       'مكوّن نموذج تصريحي يجمع بين MUI والتحقق عبر react-hook-form.',
     asyncHandler:
-      'أداة TypeScript تتناول الأخطاء المتزامنة وغير المتزامنة بأناقة داخل غلاف واحد.',
+      'أداة TypeScript تعالج أخطاء الدوال المتزامنة وغير المتزامنة بسلاسة عبر غلاف واحد.',
     tradingBot:
-      'روبوت تداول بلغة Node.js يستخدم KuCoin SDK مع مؤشرات فنية واختبار خلفي.',
+      'بوت تداول بلغة Node.js يستخدم KuCoin SDK مع مؤشرات فنية واختبار خلفي.',
     powBlockchain:
-      'سلسلة كتل بإثبات العمل مبنية من الصفر بلغة TypeScript معيارية.',
+      'سلسلة كتل بإثبات العمل مبنية من الصفر بـ TypeScript في وحدات مستقلة.',
     apologea:
-      'منتج ويب متكامل، قيد التشغيل وفي الإنتاج — المشروع الأبرز في عملي المستقل.',
+      'منتج ويب متكامل يعمل فعليًا — المشروع الأبرز في عملي المستقل.',
   },
 }
 
@@ -416,7 +416,7 @@ const educationCopy: Record<Locale, Record<EducationId, { degree: string; place:
       degree: 'بكالوريوس (مع مرتبة الشرف) في هندسة البرمجيات مع الوسائط المتعددة',
       place: 'ماليزيا',
     },
-    spanish: { degree: 'مستوى C1 في اللغة الإسبانية', place: 'إسبانيا' },
+    spanish: { degree: 'الإسبانية — مستوى C1', place: 'إسبانيا' },
   },
 }
 
@@ -452,14 +452,14 @@ const softSkillCopy: Record<Locale, readonly string[]> = {
   ar: [
     'القيادة',
     'تنسيق الفرق',
-    'الإرشاد والتوجيه',
+    'الإرشاد',
     'تحسين استخدام الموارد',
-    'تنقيح الأخطاء',
+    'تصحيح الأخطاء',
     'التحليلات',
     'التواصل',
     'العمل المستقل',
     'ضمان الجودة',
-    'سرعة التعلّم',
+    'سرعة التعلم',
     'حل المشكلات',
     'إدارة المهام',
   ],
@@ -478,8 +478,8 @@ const languageCopy: Record<Locale, readonly LanguageEntry[]> = {
   ],
   ar: [
     { name: 'العربية', level: 'اللغة الأم' },
-    { name: 'الإنجليزية', level: 'احترافية' },
-    { name: 'الإسبانية', level: 'متوسطة' },
+    { name: 'الإنجليزية', level: 'مستوى احترافي' },
+    { name: 'الإسبانية', level: 'مستوى متوسط' },
   ],
 }
 

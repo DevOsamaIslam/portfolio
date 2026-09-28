@@ -1,8 +1,8 @@
 # Osama Samarrai
 
-**Sr. Scrum Master & Frontend Developer**
+**Sr. Scrum Master & Full Stack Developer**
 
-A seasoned MERN stack developer with a proven track record in spearheading agile projects. Committed to constant professional development and keen to leverage my skills in a vibrant, forward-thinking organization.
+A seasoned full-stack developer on the MERN stack with a proven track record in spearheading agile projects. Committed to constant professional development and keen to leverage my skills in a vibrant, forward-thinking organization.
 
 [osamasamarrai@gmail.com](mailto:osamasamarrai@gmail.com) · [LinkedIn](https://www.linkedin.com/in/osama-islam-40441) · [GitHub](https://github.com/DevOsamaIslam)
 
@@ -12,7 +12,7 @@ A seasoned MERN stack developer with a proven track record in spearheading agile
 
 ### Software, delivered the agile way
 
-MERN stack engineer and certified Scrum Master focused on shipping maintainable products and keeping delivery predictable.
+Full-stack MERN engineer and certified Scrum Master focused on shipping maintainable products and keeping delivery predictable.
 
 |         7+          |            2             |        7         |       2        |
 | :-----------------: | :----------------------: | :--------------: | :------------: |
@@ -26,7 +26,7 @@ MERN stack engineer and certified Scrum Master focused on shipping maintainable 
 
 Seven years of aggregate experience in the IT sector, 3 years of ITIL and 4 years of web development, shipping CRM products and running the agile ceremonies that keep delivery predictable.
 
-#### Senior Frontend Developer — MBL High Tech
+#### Senior Full Stack Developer — MBL High Tech
 
 `March 2022 — November 2025` · Cyprus
 
@@ -50,7 +50,7 @@ Seven years of aggregate experience in the IT sector, 3 years of ITIL and 4 year
 
 ### Things I've built
 
-A live product plus the open-source hooks and utilities I reach for in my own work.
+A live full-stack product, plus the open-source hooks, utilities and Node.js projects I reach for in my own work.
 
 ### 🟢 Apologea.com — _Live_
 
@@ -162,7 +162,7 @@ What I build with day to day, plus the habits that keep a team moving.
 
 ### Let's talk
 
-Open to conversations about frontend architecture, agile delivery and anything MERN. Email is the fastest way to reach me.
+Open to conversations about full-stack architecture, agile delivery and anything MERN. Email is the fastest way to reach me.
 
 - 📧 [osamasamarrai@gmail.com](mailto:osamasamarrai@gmail.com)
 - 💼 [LinkedIn ↗](https://www.linkedin.com/in/osama-islam-40441)
@@ -212,10 +212,11 @@ Because the caches use different `key`s (`muiltr` / `muirtl`), the generated cla
 
 What the stylis plugin handles for free: `left`/`right`, `margin-*`, `padding-*`, `border-*`, `text-align`, `float`, `background-position`, and the X sign of `translate`/`translateX`. It also **does not** touch `scaleX`, which is what `Icon`'s `rtlFlip` prop uses to mirror directional glyphs (the hero's arrow) without double-flipping.
 
-Two things are deliberately script-specific rather than mirrored:
+A few things are deliberately script-specific rather than mirrored:
 
 - **Arabic type** — the font stacks fall back to `Cairo` before `system-ui`, so Arabic copy renders in a face drawn for the script while Latin copy keeps Sora/Inter (fallback is per glyph, so one stack serves every locale). Headings also get looser leading (`1.45` vs `1.25`).
 - **No tracking, no case** — kickers and the "Live" flag drop `letter-spacing` and `text-transform` when `theme.direction === 'rtl'`: Arabic has no letter case, and tracking pulls its joined letters apart.
+- **Terminology stays English** — product and repo names, languages, libraries, certifications and stack labels are never translated (`React`, `TypeScript`, `MERN`, `MUI`, `Scrum.org`, `Professional Scrum Master I (PSM I)`, `T-Systems`, `Apologea.com`, `Full Stack`, `Live Site`, `Hooks`, `Code Review`, `Agile / Scrum`, `AI-assisted Development`), and neither are the terms a developer would say that way in an English-language standup: `Scrum Master`, `Agile`, `React Hook`, `API`, `CRM`, `ITIL`. Transliterations such as "سكرام ماستر" or "أجايل" read as foreign to the developers this portfolio is aimed at, so the prose around those terms is idiomatic Arabic while the terms themselves stay recognizable.
 
 ### Language resolution
 
