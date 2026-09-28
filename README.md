@@ -117,7 +117,7 @@ Proof-of-work blockchain implemented from scratch in modular TypeScript.
 What I build with day to day, plus the habits that keep a team moving.
 
 **Frontend**
-`React` · `TypeScript` · `Redux Toolkit` · `MUI` · `React Router` · `SASS` · `CSS-in-JS`
+`React` · `TypeScript` · `Redux Toolkit` · `MUI` · `React Router` · `SASS` · `CSS-in-JS` · `Ant Design` · `React Query` · `Dexie` · `i18next` · `axios`
 
 **Backend**
 `Node.js` · `Express` · `MongoDB` · `Mongoose` · `SQL` · `Socket.IO` · `JWT`
@@ -184,11 +184,11 @@ The site ships in **English**, **Spanish** and **Arabic** at runtime — no i18n
 
 English is the authoring language and the fallback. Each locale supplies both halves of its content:
 
-| File                   | Holds                                                                                                           |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------- |
+| File                   | Holds                                                                                                                      |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `src/i18n/locales.ts`  | The locale list itself, plus each language's label, short code, BCP-47 tag and writing direction, and the resolution logic |
-| `src/i18n/messages.ts` | UI chrome — nav, headings, buttons, kickers, stat labels, screen-reader strings, `<title>` and meta description |
-| `src/data/cv.ts`       | Narrative CV content — experience, projects, skills, certificates, education                                    |
+| `src/i18n/messages.ts` | UI chrome — nav, headings, buttons, kickers, stat labels, screen-reader strings, `<title>` and meta description            |
+| `src/data/cv.ts`       | Narrative CV content — experience, projects, skills, certificates, education                                               |
 
 Both copy files are typed `Record<Locale, …>` and everything is read through the `useI18n()` hook:
 
@@ -202,10 +202,10 @@ In the navbar switcher each option is labelled in its own language (a Spanish sp
 
 Arabic is laid out right-to-left, so `localeMeta` carries a `direction` per language and the app shell is built around it. Three things change together, all derived from the same locale:
 
-| Piece                                   | What it does                                                                                                                       |
-| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `<html dir>` / `<html lang>`            | Set by `I18nProvider` in a **layout** effect, so the first painted frame is already RTL. This is what flips flex rows, text alignment and scrollbars. |
-| `theme.direction`                       | `AppThemeProvider` builds the theme with `createAppTheme(direction)`; MUI reads it for direction-aware component internals (Button icon slots, `MenuList` key handling). |
+| Piece                                   | What it does                                                                                                                                                                         |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `<html dir>` / `<html lang>`            | Set by `I18nProvider` in a **layout** effect, so the first painted frame is already RTL. This is what flips flex rows, text alignment and scrollbars.                                |
+| `theme.direction`                       | `AppThemeProvider` builds the theme with `createAppTheme(direction)`; MUI reads it for direction-aware component internals (Button icon slots, `MenuList` key handling).             |
 | Emotion cache (`src/theme/rtlCache.ts`) | One cache per direction. The RTL cache runs `stylis-plugin-rtl` (cssjanus), so the CSS MUI generates from `sx`, theme `styleOverrides` and `GlobalStyles` is mirrored automatically. |
 
 Because the caches use different `key`s (`muiltr` / `muirtl`), the generated class names are prefixed per cache — switching direction cannot leak a stale rule from the other stylesheet, and no markup is duplicated. `prefixer` is listed explicitly in `stylisPlugins` because supplying that option replaces Emotion's defaults rather than extending them.

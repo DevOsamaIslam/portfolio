@@ -10,55 +10,59 @@
  * Synced from docs/cv.md — update here when the CV changes.
  */
 
-import type { Locale } from '../i18n/locales'
+import type { Locale } from "../i18n/locales"
 
 /* ------------------------------------------------------------------ *
  * Language-neutral content
  * ------------------------------------------------------------------ */
 
 export const profile = {
-  name: 'Osama Samarrai',
-  initials: 'OS',
+  name: "Osama Samarrai",
+  initials: "OS",
   /** Kept as a string so it drops straight into the stats grid. */
-  years: '7+',
+  years: "7+",
 } as const
 
 /** Icons double as contact identifiers, so they also key the translated label. */
-export type ContactKey = 'mail' | 'linkedin' | 'github'
+export type ContactKey = "mail" | "linkedin" | "github"
 
 /** Only the label of a contact is translated, never the value or the href. */
 export const contacts = [
   {
-    icon: 'mail',
-    value: 'osamasamarrai@gmail.com',
-    href: 'mailto:osamasamarrai@gmail.com',
+    icon: "mail",
+    value: "osamasamarrai@gmail.com",
+    href: "mailto:osamasamarrai@gmail.com",
   },
   {
-    icon: 'linkedin',
-    value: 'in/osama-islam',
-    href: 'https://www.linkedin.com/in/osama-islam-40441',
+    icon: "linkedin",
+    value: "in/osama-islam",
+    href: "https://www.linkedin.com/in/osama-islam-40441",
   },
   {
-    icon: 'github',
-    value: 'DevOsamaIslam',
-    href: 'https://github.com/DevOsamaIslam',
+    icon: "github",
+    value: "DevOsamaIslam",
+    href: "https://github.com/DevOsamaIslam",
   },
-] as const satisfies readonly { icon: ContactKey; value: string; href: string }[]
+] as const satisfies readonly {
+  icon: ContactKey
+  value: string
+  href: string
+}[]
 
 export type ProjectId =
-  | 'useSmartValue'
-  | 'useFilters'
-  | 'muiCustomForm'
-  | 'asyncHandler'
-  | 'tradingBot'
-  | 'powBlockchain'
-  | 'apologea'
+  | "useSmartValue"
+  | "useFilters"
+  | "muiCustomForm"
+  | "asyncHandler"
+  | "tradingBot"
+  | "powBlockchain"
+  | "apologea"
 
 /**
  * Repo URLs below currently point at the GitHub profile plus the repo slug.
  * Replace `href` values with direct repo/demo links when available.
  */
-const githubProfile = 'https://github.com/DevOsamaIslam/'
+const githubProfile = "https://github.com/DevOsamaIslam/"
 
 type ProjectMeta = {
   id: ProjectId
@@ -71,96 +75,125 @@ type ProjectMeta = {
 /** Product names, tags and links are proper nouns, so they never translate. */
 const projectMeta: readonly ProjectMeta[] = [
   {
-    id: 'useSmartValue',
-    name: 'useSmartValue',
-    tags: ['React', 'TypeScript', 'Hooks'],
-    href: githubProfile + 'use-smartvalue',
+    id: "useSmartValue",
+    name: "useSmartValue",
+    tags: ["React", "TypeScript", "Hooks"],
+    href: githubProfile + "use-smartvalue",
   },
   {
-    id: 'useFilters',
-    name: 'useFilters Hook',
-    tags: ['React', 'TypeScript', 'Hooks'],
-    href: githubProfile + 'use-filters',
+    id: "useFilters",
+    name: "useFilters Hook",
+    tags: ["React", "TypeScript", "Hooks"],
+    href: githubProfile + "use-filters",
   },
   {
-    id: 'muiCustomForm',
-    name: 'MUI Custom Form',
-    tags: ['React', 'MUI', 'react-hook-form'],
-    href: githubProfile + 'mui-custom-form',
+    id: "muiCustomForm",
+    name: "MUI Custom Form",
+    tags: ["React", "MUI", "react-hook-form"],
+    href: githubProfile + "mui-custom-form",
   },
   {
-    id: 'asyncHandler',
-    name: 'Async Handler',
-    tags: ['TypeScript', 'Async', 'Utility'],
-    href: githubProfile + 'async-handler-ts',
+    id: "asyncHandler",
+    name: "Async Handler",
+    tags: ["TypeScript", "Async", "Utility"],
+    href: githubProfile + "async-handler-ts",
   },
   {
-    id: 'tradingBot',
-    name: 'Trading Bot',
-    tags: ['Node.js', 'TypeScript', 'KuCoin SDK'],
-    href: githubProfile + 'KuCoin-Advanced-Trading-Bot',
+    id: "tradingBot",
+    name: "Trading Bot",
+    tags: ["Node.js", "TypeScript", "KuCoin SDK"],
+    href: githubProfile + "KuCoin-Advanced-Trading-Bot",
   },
   {
-    id: 'powBlockchain',
-    name: 'PoW Blockchain',
-    tags: ['TypeScript', 'Blockchain', 'Cryptography'],
-    href: githubProfile + 'privchain',
+    id: "powBlockchain",
+    name: "PoW Blockchain",
+    tags: ["TypeScript", "Blockchain", "Cryptography"],
+    href: githubProfile + "privchain",
   },
   {
-    id: 'apologea',
-    name: 'Apologea.com',
-    tags: ['Full Stack', 'MERN', 'Live Site'],
-    href: 'https://apologea.com',
+    id: "apologea",
+    name: "Apologea.com",
+    tags: ["Full Stack", "MERN", "Live Site"],
+    href: "https://apologea.com",
     featured: true,
   },
 ]
 
-export type SkillGroupId = 'frontend' | 'backend' | 'testing' | 'practices'
+export type SkillGroupId = "frontend" | "backend" | "testing" | "practices"
 
 type SkillGroupMeta = { id: SkillGroupId; items: readonly string[] }
 
 /** Technology names are brands, so only the group heading is translated. */
 const technicalSkillMeta: readonly SkillGroupMeta[] = [
   {
-    id: 'frontend',
-    items: ['React', 'TypeScript', 'Redux Toolkit', 'MUI', 'React Router', 'SASS', 'CSS-in-JS'],
+    id: "frontend",
+    items: [
+      "React",
+      "TypeScript",
+      "Redux Toolkit",
+      "MUI",
+      "React Router",
+      "SASS",
+      "CSS-in-JS",
+      "Ant Design",
+      "React Query",
+      "Dexie",
+      "i18next",
+      "axios",
+    ],
   },
   {
-    id: 'backend',
-    items: ['Node.js', 'Express', 'MongoDB', 'Mongoose', 'SQL', 'Socket.IO', 'JWT'],
+    id: "backend",
+    items: [
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Mongoose",
+      "SQL",
+      "Socket.IO",
+      "JWT",
+    ],
   },
   {
-    id: 'testing',
-    items: ['Vitest', 'Playwright', 'Selenium', 'Code Review'],
+    id: "testing",
+    items: ["Vitest", "Playwright", "Selenium", "Code Review"],
   },
   {
-    id: 'practices',
-    items: ['Agile / Scrum', 'Python', 'AI-assisted Development'],
+    id: "practices",
+    items: ["Agile / Scrum", "Python", "AI-assisted Development"],
   },
 ]
 
-export type JobId = 'mbl' | 'tsystems'
+export type JobId = "mbl" | "tsystems"
 
 type JobMeta = { id: JobId; company: string }
 
 const jobMeta: readonly JobMeta[] = [
-  { id: 'mbl', company: 'MBL High Tech' },
-  { id: 'tsystems', company: 'T-Systems' },
+  { id: "mbl", company: "MBL High Tech" },
+  { id: "tsystems", company: "T-Systems" },
 ]
 
-export type EducationId = 'bsc' | 'spanish'
+export type EducationId = "bsc" | "spanish"
 
 type EducationMeta = { id: EducationId; year: string; current?: boolean }
 
 const educationMeta: readonly EducationMeta[] = [
-  { id: 'bsc', year: '2017' },
-  { id: 'spanish', year: '2026', current: true },
+  { id: "bsc", year: "2017" },
+  { id: "spanish", year: "2026", current: true },
 ]
 
 /** Certificates keep their official name and issuer in every language. */
 export const certificates = [
-  { name: 'Professional Scrum Master I (PSM I)', issuer: 'Scrum.org', year: 2026 },
-  { name: 'MERN Stack Developer — E-Degree Program', issuer: 'Eduonix', year: 2022 },
+  {
+    name: "Professional Scrum Master I (PSM I)",
+    issuer: "Scrum.org",
+    year: 2026,
+  },
+  {
+    name: "MERN Stack Developer — E-Degree Program",
+    issuer: "Eduonix",
+    year: 2022,
+  },
 ] as const
 
 /* ------------------------------------------------------------------ *
@@ -213,33 +246,33 @@ export type Cv = {
  * Translated copy
  * ------------------------------------------------------------------ */
 
-const profileCopy: Record<Locale, Pick<Cv, 'title' | 'summary'>> = {
+const profileCopy: Record<Locale, Pick<Cv, "title" | "summary">> = {
   en: {
-    title: 'Sr. Scrum Master & Full Stack Developer',
+    title: "Sr. Scrum Master & Full Stack Developer",
     summary:
-      'A seasoned full-stack developer on the MERN stack with a proven track record in spearheading agile projects. ' +
-      'Committed to constant professional development and keen to leverage my skills in a vibrant, ' +
-      'forward-thinking organization.',
+      "A seasoned full-stack developer on the MERN stack with a proven track record in spearheading agile projects. " +
+      "Committed to constant professional development and keen to leverage my skills in a vibrant, " +
+      "forward-thinking organization.",
   },
   es: {
-    title: 'Scrum Master y Desarrollador Full Stack Senior',
+    title: "Scrum Master y Desarrollador Full Stack Senior",
     summary:
-      'Desarrollador full-stack del stack MERN con amplia experiencia liderando proyectos ágiles. ' +
-      'Comprometido con el desarrollo profesional continuo y con ganas de aportar mis habilidades ' +
-      'a una organización dinámica y con visión de futuro.',
+      "Desarrollador full-stack del stack MERN con amplia experiencia liderando proyectos ágiles. " +
+      "Comprometido con el desarrollo profesional continuo y con ganas de aportar mis habilidades " +
+      "a una organización dinámica y con visión de futuro.",
   },
   ar: {
-    title: 'Scrum Master ومطوّر Full Stack',
+    title: "Scrum Master ومطوّر Full Stack",
     summary:
-      'مطوّر Full Stack في منظومة MERN بسجل موثوق في قيادة مشاريع Agile. ' +
-      'ملتزم بالتطوير المهني المستمر ومتشوّق لتوظيف مهاراتي في شركة طموحة وديناميكية.',
+      "مطوّر Full Stack في منظومة MERN بسجل موثوق في قيادة مشاريع Agile. " +
+      "ملتزم بالتطوير المهني المستمر ومتشوّق لتوظيف مهاراتي في شركة طموحة وديناميكية.",
   },
 }
 
 const contactLabelCopy: Record<Locale, Record<ContactKey, string>> = {
-  en: { mail: 'Email', linkedin: 'LinkedIn', github: 'GitHub' },
-  es: { mail: 'Correo', linkedin: 'LinkedIn', github: 'GitHub' },
-  ar: { mail: 'البريد', linkedin: 'LinkedIn', github: 'GitHub' },
+  en: { mail: "Email", linkedin: "LinkedIn", github: "GitHub" },
+  es: { mail: "Correo", linkedin: "LinkedIn", github: "GitHub" },
+  ar: { mail: "البريد", linkedin: "LinkedIn", github: "GitHub" },
 }
 
 type JobCopy = {
@@ -252,73 +285,73 @@ type JobCopy = {
 const jobCopy: Record<Locale, Record<JobId, JobCopy>> = {
   en: {
     mbl: {
-      role: 'Senior Full Stack Developer',
-      period: 'March 2022 — November 2025',
-      location: 'Cyprus',
+      role: "Senior Full Stack Developer",
+      period: "March 2022 — November 2025",
+      location: "Cyprus",
       points: [
-        'Championed agile methodologies as Scrum Master, driving delivery across the team.',
-        'Led development of CRM software for 3+ projects from architecture to release.',
-        'Migrated legacy projects to newer, more efficient technologies with zero downtime.',
-        'Inspected code for quality, consistency, and adherence to best practices.',
-        'Created project structures focused on scalability and long-term maintainability.',
+        "Championed agile methodologies as Scrum Master, driving delivery across the team.",
+        "Led development of CRM software for 3+ projects from architecture to release.",
+        "Migrated legacy projects to newer, more efficient technologies with zero downtime.",
+        "Inspected code for quality, consistency, and adherence to best practices.",
+        "Created project structures focused on scalability and long-term maintainability.",
       ],
     },
     tsystems: {
-      role: 'System Engineer',
-      period: 'June 2018 — January 2021',
-      location: 'Malaysia',
+      role: "System Engineer",
+      period: "June 2018 — January 2021",
+      location: "Malaysia",
       points: [
-        'Acted as the communication link between management and the engineering team.',
-        'Built automation processes and bots for INM and aggregate reporting.',
-        'Implemented batch resolution of events, cutting manual toil for operations.',
+        "Acted as the communication link between management and the engineering team.",
+        "Built automation processes and bots for INM and aggregate reporting.",
+        "Implemented batch resolution of events, cutting manual toil for operations.",
       ],
     },
   },
   es: {
     mbl: {
-      role: 'Desarrollador Full Stack Senior',
-      period: 'Marzo 2022 — Noviembre 2025',
-      location: 'Chipre',
+      role: "Desarrollador Full Stack Senior",
+      period: "Marzo 2022 — Noviembre 2025",
+      location: "Chipre",
       points: [
-        'Impulsé las metodologías ágiles como Scrum Master, mejorando la entrega en todo el equipo.',
-        'Lideré el desarrollo de software CRM en más de 3 proyectos, desde la arquitectura hasta el lanzamiento.',
-        'Migré proyectos heredados a tecnologías más nuevas y eficientes sin tiempo de inactividad.',
-        'Revisé el código para garantizar la calidad, la consistencia y el cumplimiento de las buenas prácticas.',
-        'Creé estructuras de proyecto centradas en la escalabilidad y el mantenimiento a largo plazo.',
+        "Impulsé las metodologías ágiles como Scrum Master, mejorando la entrega en todo el equipo.",
+        "Lideré el desarrollo de software CRM en más de 3 proyectos, desde la arquitectura hasta el lanzamiento.",
+        "Migré proyectos heredados a tecnologías más nuevas y eficientes sin tiempo de inactividad.",
+        "Revisé el código para garantizar la calidad, la consistencia y el cumplimiento de las buenas prácticas.",
+        "Creé estructuras de proyecto centradas en la escalabilidad y el mantenimiento a largo plazo.",
       ],
     },
     tsystems: {
-      role: 'Ingeniero de Sistemas',
-      period: 'Junio 2018 — Enero 2021',
-      location: 'Malasia',
+      role: "Ingeniero de Sistemas",
+      period: "Junio 2018 — Enero 2021",
+      location: "Malasia",
       points: [
-        'Serví de enlace de comunicación entre la dirección y el equipo de ingeniería.',
-        'Desarrollé procesos de automatización y bots para INM y la generación de informes agregados.',
-        'Implementé la resolución por lotes de eventos, reduciendo el trabajo manual de operaciones.',
+        "Serví de enlace de comunicación entre la dirección y el equipo de ingeniería.",
+        "Desarrollé procesos de automatización y bots para INM y la generación de informes agregados.",
+        "Implementé la resolución por lotes de eventos, reduciendo el trabajo manual de operaciones.",
       ],
     },
   },
   ar: {
     mbl: {
-      role: 'مطوّر Full Stack',
-      period: 'مارس 2022 — نوفمبر 2025',
-      location: 'قبرص',
+      role: "مطوّر Full Stack",
+      period: "مارس 2022 — نوفمبر 2025",
+      location: "قبرص",
       points: [
-        'قدت تطبيق منهجيات Agile بصفتي Scrum Master، فارتفعت كفاءة التسليم لدى الفريق.',
-        'أدرت تطوير برمجيات CRM في أكثر من 3 مشاريع، من التصميم حتى الإطلاق.',
-        'نقلت مشاريع قديمة إلى تقنيات أحدث وأكثر كفاءة دون أي توقف في الخدمة.',
-        'راجعت الشيفرة لضمان الجودة والاتساق والالتزام بأفضل الممارسات.',
-        'أنشأت هياكل مشاريع تركّز على قابلية التوسع والصيانة على المدى الطويل.',
+        "قدت تطبيق منهجيات Agile بصفتي Scrum Master، فارتفعت كفاءة التسليم لدى الفريق.",
+        "أدرت تطوير برمجيات CRM في أكثر من 3 مشاريع، من التصميم حتى الإطلاق.",
+        "نقلت مشاريع قديمة إلى تقنيات أحدث وأكثر كفاءة دون أي توقف في الخدمة.",
+        "راجعت الشيفرة لضمان الجودة والاتساق والالتزام بأفضل الممارسات.",
+        "أنشأت هياكل مشاريع تركّز على قابلية التوسع والصيانة على المدى الطويل.",
       ],
     },
     tsystems: {
-      role: 'مهندس أنظمة',
-      period: 'يونيو 2018 — يناير 2021',
-      location: 'ماليزيا',
+      role: "مهندس أنظمة",
+      period: "يونيو 2018 — يناير 2021",
+      location: "ماليزيا",
       points: [
-        'عملت كحلقة وصل بين الإدارة والفريق الهندسي.',
-        'بنيت عمليات أتمتة وبرامج روبوتية لتقارير INM والتقارير المجمّعة.',
-        'طبّقت معالجة الأحداث على دفعات، مما قلّل العمل اليدوي على فريق العمليات.',
+        "عملت كحلقة وصل بين الإدارة والفريق الهندسي.",
+        "بنيت عمليات أتمتة وبرامج روبوتية لتقارير INM والتقارير المجمّعة.",
+        "طبّقت معالجة الأحداث على دفعات، مما قلّل العمل اليدوي على فريق العمليات.",
       ],
     },
   },
@@ -327,159 +360,162 @@ const jobCopy: Record<Locale, Record<JobId, JobCopy>> = {
 const projectCopy: Record<Locale, Record<ProjectId, string>> = {
   en: {
     useSmartValue:
-      'Custom React hook unifying useState and useRef behind a single, ergonomic API.',
+      "Custom React hook unifying useState and useRef behind a single, ergonomic API.",
     useFilters:
-      'React hook that manages complex filter state and URL-synced query parameters.',
+      "React hook that manages complex filter state and URL-synced query parameters.",
     muiCustomForm:
-      'Declarative form component combining MUI with react-hook-form validation.',
+      "Declarative form component combining MUI with react-hook-form validation.",
     asyncHandler:
-      'TypeScript utility that gracefully handles both sync and async errors in one wrapper.',
+      "TypeScript utility that gracefully handles both sync and async errors in one wrapper.",
     tradingBot:
-      'Node.js trading bot using the KuCoin SDK with technical indicators and backtesting.',
+      "Node.js trading bot using the KuCoin SDK with technical indicators and backtesting.",
     powBlockchain:
-      'Proof-of-work blockchain implemented from scratch in modular TypeScript.',
+      "Proof-of-work blockchain implemented from scratch in modular TypeScript.",
     apologea:
-      'Full-stack web product, live and in production — the flagship of my independent work.',
+      "Full-stack web product, live and in production — the flagship of my independent work.",
   },
   es: {
     useSmartValue:
-      'Hook de React que unifica useState y useRef en una única API ergonómica.',
+      "Hook de React que unifica useState y useRef en una única API ergonómica.",
     useFilters:
-      'Hook de React que gestiona estados de filtro complejos y parámetros de consulta sincronizados con la URL.',
+      "Hook de React que gestiona estados de filtro complejos y parámetros de consulta sincronizados con la URL.",
     muiCustomForm:
-      'Componente de formulario declarativo que combina MUI con la validación de react-hook-form.',
+      "Componente de formulario declarativo que combina MUI con la validación de react-hook-form.",
     asyncHandler:
-      'Utilidad de TypeScript que gestiona con elegancia errores síncronos y asíncronos en un solo contenedor.',
+      "Utilidad de TypeScript que gestiona con elegancia errores síncronos y asíncronos en un solo contenedor.",
     tradingBot:
-      'Bot de trading en Node.js que usa el SDK de KuCoin, con indicadores técnicos y backtesting.',
+      "Bot de trading en Node.js que usa el SDK de KuCoin, con indicadores técnicos y backtesting.",
     powBlockchain:
-      'Blockchain de prueba de trabajo implementada desde cero en TypeScript modular.',
+      "Blockchain de prueba de trabajo implementada desde cero en TypeScript modular.",
     apologea:
-      'Producto web full-stack, en producción y en vivo: el proyecto insignia de mi trabajo independiente.',
+      "Producto web full-stack, en producción y en vivo: el proyecto insignia de mi trabajo independiente.",
   },
   ar: {
     useSmartValue:
-      'React Hook مخصّص يوحّد useState و useRef خلف واجهة API واحدة سهلة الاستخدام.',
+      "React Hook مخصّص يوحّد useState و useRef خلف واجهة API واحدة سهلة الاستخدام.",
     useFilters:
-      'React Hook يدير حالات تصفية معقّدة ومعاملات استعلام متزامنة مع عنوان URL.',
+      "React Hook يدير حالات تصفية معقّدة ومعاملات استعلام متزامنة مع عنوان URL.",
     muiCustomForm:
-      'مكوّن نموذج تصريحي يجمع بين MUI والتحقق عبر react-hook-form.',
+      "مكوّن نموذج تصريحي يجمع بين MUI والتحقق عبر react-hook-form.",
     asyncHandler:
-      'أداة TypeScript تعالج أخطاء الدوال المتزامنة وغير المتزامنة بسلاسة عبر غلاف واحد.',
+      "أداة TypeScript تعالج أخطاء الدوال المتزامنة وغير المتزامنة بسلاسة عبر غلاف واحد.",
     tradingBot:
-      'بوت تداول بلغة Node.js يستخدم KuCoin SDK مع مؤشرات فنية واختبار خلفي.',
+      "بوت تداول بلغة Node.js يستخدم KuCoin SDK مع مؤشرات فنية واختبار خلفي.",
     powBlockchain:
-      'سلسلة كتل بإثبات العمل مبنية من الصفر بـ TypeScript في وحدات مستقلة.',
-    apologea:
-      'منتج ويب متكامل يعمل فعليًا — المشروع الأبرز في عملي المستقل.',
+      "سلسلة كتل بإثبات العمل مبنية من الصفر بـ TypeScript في وحدات مستقلة.",
+    apologea: "منتج ويب متكامل يعمل فعليًا — المشروع الأبرز في عملي المستقل.",
   },
 }
 
 const skillGroupCopy: Record<Locale, Record<SkillGroupId, string>> = {
   en: {
-    frontend: 'Frontend',
-    backend: 'Backend',
-    testing: 'Testing & Quality',
-    practices: 'Practices & Tools',
+    frontend: "Frontend",
+    backend: "Backend",
+    testing: "Testing & Quality",
+    practices: "Practices & Tools",
   },
   es: {
-    frontend: 'Frontend',
-    backend: 'Backend',
-    testing: 'Pruebas y calidad',
-    practices: 'Prácticas y herramientas',
+    frontend: "Frontend",
+    backend: "Backend",
+    testing: "Pruebas y calidad",
+    practices: "Prácticas y herramientas",
   },
   ar: {
-    frontend: 'الواجهة الأمامية',
-    backend: 'الخلفية',
-    testing: 'الاختبارات والجودة',
-    practices: 'الممارسات والأدوات',
+    frontend: "الواجهة الأمامية",
+    backend: "الخلفية",
+    testing: "الاختبارات والجودة",
+    practices: "الممارسات والأدوات",
   },
 }
 
-const educationCopy: Record<Locale, Record<EducationId, { degree: string; place: string }>> = {
+const educationCopy: Record<
+  Locale,
+  Record<EducationId, { degree: string; place: string }>
+> = {
   en: {
     bsc: {
-      degree: 'BSc (Hons) in Software Engineering with Multimedia',
-      place: 'Malaysia',
+      degree: "BSc (Hons) in Software Engineering with Multimedia",
+      place: "Malaysia",
     },
-    spanish: { degree: 'C1 in Spanish Language', place: 'Spain' },
+    spanish: { degree: "C1 in Spanish Language", place: "Spain" },
   },
   es: {
     bsc: {
-      degree: 'Licenciatura (Hons) en Ingeniería de Software con Multimedia',
-      place: 'Malasia',
+      degree: "Licenciatura (Hons) en Ingeniería de Software con Multimedia",
+      place: "Malasia",
     },
-    spanish: { degree: 'Nivel C1 de Español', place: 'España' },
+    spanish: { degree: "Nivel C1 de Español", place: "España" },
   },
   ar: {
     bsc: {
-      degree: 'بكالوريوس (مع مرتبة الشرف) في هندسة البرمجيات مع الوسائط المتعددة',
-      place: 'ماليزيا',
+      degree:
+        "بكالوريوس (مع مرتبة الشرف) في هندسة البرمجيات مع الوسائط المتعددة",
+      place: "ماليزيا",
     },
-    spanish: { degree: 'الإسبانية — مستوى C1', place: 'إسبانيا' },
+    spanish: { degree: "الإسبانية — مستوى C1", place: "إسبانيا" },
   },
 }
 
 const softSkillCopy: Record<Locale, readonly string[]> = {
   en: [
-    'Leadership',
-    'Team Coordination',
-    'Mentoring',
-    'Resource Optimization',
-    'Debugging',
-    'Analytics',
-    'Communication',
-    'Independent Work',
-    'Quality Assurance',
-    'Fast Learning',
-    'Problem Solving',
-    'Task Management',
+    "Leadership",
+    "Team Coordination",
+    "Mentoring",
+    "Resource Optimization",
+    "Debugging",
+    "Analytics",
+    "Communication",
+    "Independent Work",
+    "Quality Assurance",
+    "Fast Learning",
+    "Problem Solving",
+    "Task Management",
   ],
   es: [
-    'Liderazgo',
-    'Coordinación de equipos',
-    'Mentoría',
-    'Optimización de recursos',
-    'Depuración',
-    'Analítica',
-    'Comunicación',
-    'Trabajo autónomo',
-    'Aseguramiento de calidad',
-    'Aprendizaje rápido',
-    'Resolución de problemas',
-    'Gestión de tareas',
+    "Liderazgo",
+    "Coordinación de equipos",
+    "Mentoría",
+    "Optimización de recursos",
+    "Depuración",
+    "Analítica",
+    "Comunicación",
+    "Trabajo autónomo",
+    "Aseguramiento de calidad",
+    "Aprendizaje rápido",
+    "Resolución de problemas",
+    "Gestión de tareas",
   ],
   ar: [
-    'القيادة',
-    'تنسيق الفرق',
-    'الإرشاد',
-    'تحسين استخدام الموارد',
-    'تصحيح الأخطاء',
-    'التحليلات',
-    'التواصل',
-    'العمل المستقل',
-    'ضمان الجودة',
-    'سرعة التعلم',
-    'حل المشكلات',
-    'إدارة المهام',
+    "القيادة",
+    "تنسيق الفرق",
+    "الإرشاد",
+    "تحسين استخدام الموارد",
+    "تصحيح الأخطاء",
+    "التحليلات",
+    "التواصل",
+    "العمل المستقل",
+    "ضمان الجودة",
+    "سرعة التعلم",
+    "حل المشكلات",
+    "إدارة المهام",
   ],
 }
 
 const languageCopy: Record<Locale, readonly LanguageEntry[]> = {
   en: [
-    { name: 'Arabic', level: 'Native' },
-    { name: 'English', level: 'Business' },
-    { name: 'Spanish', level: 'Intermediate' },
+    { name: "Arabic", level: "Native" },
+    { name: "English", level: "Business" },
+    { name: "Spanish", level: "Intermediate" },
   ],
   es: [
-    { name: 'Árabe', level: 'Nativo' },
-    { name: 'Inglés', level: 'Empresarial' },
-    { name: 'Español', level: 'Intermedio' },
+    { name: "Árabe", level: "Nativo" },
+    { name: "Inglés", level: "Empresarial" },
+    { name: "Español", level: "Intermedio" },
   ],
   ar: [
-    { name: 'العربية', level: 'اللغة الأم' },
-    { name: 'الإنجليزية', level: 'مستوى احترافي' },
-    { name: 'الإسبانية', level: 'مستوى متوسط' },
+    { name: "العربية", level: "اللغة الأم" },
+    { name: "الإنجليزية", level: "مستوى احترافي" },
+    { name: "الإسبانية", level: "مستوى متوسط" },
   ],
 }
 
@@ -501,13 +537,16 @@ const buildCv = (locale: Locale): Cv => ({
     items: group.items,
   })),
   softSkills: softSkillCopy[locale],
-  education: educationMeta.map((meta) => ({ ...meta, ...educationCopy[locale][meta.id] })),
+  education: educationMeta.map((meta) => ({
+    ...meta,
+    ...educationCopy[locale][meta.id],
+  })),
   languages: languageCopy[locale],
 })
 
 /** The CV for every supported language, resolved by the `I18nProvider`. */
 export const cvByLocale: Record<Locale, Cv> = {
-  en: buildCv('en'),
-  es: buildCv('es'),
-  ar: buildCv('ar'),
+  en: buildCv("en"),
+  es: buildCv("es"),
+  ar: buildCv("ar"),
 }
