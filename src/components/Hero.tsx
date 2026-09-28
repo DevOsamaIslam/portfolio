@@ -9,6 +9,7 @@ import { alpha } from '@mui/material/styles'
 import type { SxProps, Theme } from '@mui/material/styles'
 
 import { contacts, profile } from '../data/cv'
+import { useI18n } from '../i18n/I18nProvider'
 import { externalLinkProps } from '../utils/links'
 import { accents, glassTokens } from '../theme/glass'
 import { displayFont } from '../theme/theme'
@@ -57,6 +58,7 @@ const badgeSx: SxProps<Theme> = {
 }
 
 export default function Hero() {
+  const { t, cv } = useI18n()
   const email = contacts.find((contact) => contact.icon === 'mail')
 
   return (
@@ -65,7 +67,7 @@ export default function Hero() {
         <Reveal component={Card} sx={heroCardSx}>
           <Box sx={{ flex: 1, minWidth: 0 }}>
             <Typography sx={{ color: 'text.secondary', fontSize: 15, mb: '8px' }}>
-              Hello, I’m
+              {t.hero.greeting}
             </Typography>
 
             <Typography variant="h1" sx={nameSx}>
@@ -80,11 +82,11 @@ export default function Hero() {
                 color: 'text.secondary',
               }}
             >
-              {profile.title}
+              {cv.title}
             </Typography>
 
             <Typography sx={{ mt: '18px', color: 'text.secondary', maxWidth: 560 }}>
-              {profile.summary}
+              {cv.summary}
             </Typography>
 
             <Stack
@@ -98,7 +100,7 @@ export default function Hero() {
                 href="#projects"
                 endIcon={<Icon name="arrow-right" size={17} />}
               >
-                View projects
+                {t.hero.viewProjects}
               </Button>
 
               {email ? (
@@ -107,7 +109,7 @@ export default function Hero() {
                   href={email.href}
                   startIcon={<Icon name="mail" size={17} />}
                 >
-                  Email me
+                  {t.hero.emailMe}
                 </Button>
               ) : null}
             </Stack>
@@ -120,11 +122,11 @@ export default function Hero() {
             >
               {contacts.map((contact) => (
                 <Chip
-                  key={contact.label}
+                  key={contact.icon}
                   component="a"
                   clickable
                   href={contact.href}
-                  title={`${contact.label}: ${contact.value}`}
+                  title={`${cv.contactLabels[contact.icon]}: ${contact.value}`}
                   icon={<Icon name={contact.icon} size={15} />}
                   label={contact.value}
                   {...externalLinkProps(contact.href)}

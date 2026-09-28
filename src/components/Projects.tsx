@@ -6,7 +6,8 @@ import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import type { SxProps, Theme } from '@mui/material/styles'
 
-import { projects, type Project } from '../data/cv'
+import type { Project } from '../data/cv'
+import { useI18n } from '../i18n/I18nProvider'
 import { externalLinkProps } from '../utils/links'
 import { accents, glassHover, glassTokens } from '../theme/glass'
 import { displayFont } from '../theme/theme'
@@ -14,9 +15,6 @@ import Icon from './Icon'
 import Reveal from './Reveal'
 import Section from './Section'
 import SectionHead from './SectionHead'
-
-const featured = projects.find((project) => project.featured)
-const openSource = projects.filter((project) => !project.featured)
 
 const gridSx: SxProps<Theme> = {
   display: 'grid',
@@ -77,7 +75,7 @@ const visualSx: SxProps<Theme> = {
   '@media (max-width:820px)': { width: '100%', height: 120 },
 }
 
-function ProjectTags({ tags }: { tags: string[] }) {
+function ProjectTags({ tags }: { tags: readonly string[] }) {
   return (
     <Box sx={tagsSx}>
       {tags.map((tag) => (
@@ -111,14 +109,15 @@ function ProjectLink({ project, label }: { project: Project; label: string }) {
 }
 
 export default function Projects() {
+  const { t, cv } = useI18n()
+
+  const featured = cv.projects.find((project) => project.featured)
+  const openSource = cv.projects.filter((project) => !project.featured)
+
   return (
     <Section id="projects">
       <Container>
-        <SectionHead
-          kicker="Projects"
-          title="Things I’ve built"
-          sub="A live product plus the open-source hooks and utilities I reach for in my own work. Every card links out to the running site or the source."
-        />
+        <SectionHead kicker={t.projects.kicker} title={t.projects.title} sub={t.projects.sub} />
 
         <Box sx={gridSx}>
           {featured ? (
@@ -144,7 +143,7 @@ export default function Projects() {
                     mb: '10px',
                   }}
                 >
-                  Live
+                  {t.projects.live}
                 </Typography>
 
                 <Typography variant="h3" sx={{ fontSize: 17, fontWeight: 700 }}>
@@ -156,7 +155,7 @@ export default function Projects() {
                 </Typography>
 
                 <ProjectTags tags={featured.tags} />
-                <ProjectLink project={featured} label="Visit the site" />
+                <ProjectLink project={featured} label={t.projects.visit} />
               </Box>
 
               <Box sx={visualSx} aria-hidden>
@@ -181,7 +180,7 @@ export default function Projects() {
               </Typography>
 
               <ProjectTags tags={project.tags} />
-              <ProjectLink project={project} label="View source" />
+              <ProjectLink project={project} label={t.projects.source} />
             </Reveal>
           ))}
         </Box>

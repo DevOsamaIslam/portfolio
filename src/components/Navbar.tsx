@@ -9,19 +9,11 @@ import { alpha } from '@mui/material/styles'
 import type { SxProps, Theme } from '@mui/material/styles'
 
 import { profile } from '../data/cv'
+import { useI18n } from '../i18n/I18nProvider'
+import { SECTION_IDS } from '../i18n/messages'
 import { accents, glassTokens } from '../theme/glass'
 import { displayFont } from '../theme/theme'
-
-/** Anchor ids must match the `id` on each `<Section>` in the page. */
-const links = [
-  { id: 'home', label: 'Home' },
-  { id: 'about', label: 'About' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'credentials', label: 'Credentials' },
-  { id: 'contact', label: 'Contact' },
-] as const
+import LanguageSwitcher from './LanguageSwitcher'
 
 const brandSx: SxProps<Theme> = {
   display: 'flex',
@@ -66,11 +58,12 @@ const navLinkSx = (isActive: boolean): SxProps<Theme> => ({
 })
 
 export default function Navbar() {
-  const [active, setActive] = useState<string>(links[0].id)
+  const { t } = useI18n()
+  const [active, setActive] = useState<string>(SECTION_IDS[0])
 
   useEffect(() => {
-    const sections = links
-      .map((link) => document.getElementById(link.id))
+    const sections = SECTION_IDS
+      .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => section !== null)
 
     if (sections.length === 0 || typeof IntersectionObserver === 'undefined') {
@@ -98,7 +91,7 @@ export default function Navbar() {
   return (
     <AppBar position="sticky">
       <Container>
-        <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
+        <Toolbar disableGutters sx={{ justifyContent: 'space-between', gap: '16px' }}>
           <Box component="a" href="#home" sx={brandSx}>
             <Box sx={logoSx} aria-hidden>
               {profile.initials}
@@ -106,26 +99,30 @@ export default function Navbar() {
             {profile.name}
           </Box>
 
-          <Stack
-            component="nav"
-            aria-label="Primary"
-            direction="row"
-            spacing={0.5}
-            sx={{ display: { xs: 'none', md: 'flex' } }}
-          >
-            {links.map((link) => {
-              const isActive = active === link.id
-              return (
-                <Link
-                  key={link.id}
-                  href={`#${link.id}`}
-                  aria-current={isActive ? 'true' : undefined}
-                  sx={navLinkSx(isActive)}
-                >
-                  {link.label}
-                </Link>
-              )
-            })}
+          <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
+            <Stack
+              component="nav"
+              aria-label={t.a11y.primaryNav}
+              direction="row"
+              spacing={0.5}
+              sx={{ display: { xs: 'none', md: 'flex' } }}
+            >
+              {SECTION_IDS.map((id) => {
+                const isActive = active === id
+                return (
+                  <Link
+                    key={id}
+                    href={`#${id}`}
+                    aria-current={isActive ? 'true' : undefined}
+                    sx={navLinkSx(isActive)}
+                  >
+                    {t.nav[id]}
+                  </Link>
+                )
+              })}
+            </Stack>
+
+            <LanguageSwitcher />
           </Stack>
         </Toolbar>
       </Container>

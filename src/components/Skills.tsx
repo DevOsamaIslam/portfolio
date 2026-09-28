@@ -5,7 +5,7 @@ import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import type { SxProps, Theme } from '@mui/material/styles'
 
-import { softSkills, technicalSkills } from '../data/cv'
+import { useI18n } from '../i18n/I18nProvider'
 import { glassHover } from '../theme/glass'
 import Reveal from './Reveal'
 import Section from './Section'
@@ -24,17 +24,15 @@ const chipRowSx: SxProps<Theme> = {
 }
 
 export default function Skills() {
+  const { t, cv } = useI18n()
+
   return (
     <Section id="skills">
       <Container>
-        <SectionHead
-          kicker="Skills"
-          title="The stack and how I work"
-          sub="What I build with day to day, plus the habits that keep a team moving."
-        />
+        <SectionHead kicker={t.skills.kicker} title={t.skills.title} sub={t.skills.sub} />
 
         <Box sx={gridSx}>
-          {technicalSkills.map((group, index) => (
+          {cv.technicalSkills.map((group, index) => (
             <Reveal
               key={group.category}
               component={Card}
@@ -72,12 +70,12 @@ export default function Skills() {
               letterSpacing: '0.02em',
             }}
           >
-            Ways of working
+            {t.skills.waysOfWorking}
           </Typography>
         </Reveal>
 
         <Reveal sx={{ ...chipRowSx, mt: '18px' }}>
-          {softSkills.map((skill) => (
+          {cv.softSkills.map((skill) => (
             <Chip key={skill} label={skill} />
           ))}
         </Reveal>

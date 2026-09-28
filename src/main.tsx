@@ -5,6 +5,7 @@ import GlobalStyles from '@mui/material/GlobalStyles'
 import { ThemeProvider } from '@mui/material/styles'
 
 import App from './App'
+import I18nProvider from './i18n/I18nProvider'
 import { globalStyles } from './theme/globalStyles'
 import theme from './theme/theme'
 
@@ -17,9 +18,11 @@ if (!container) {
 createRoot(container).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <GlobalStyles styles={globalStyles} />
-      <App />
+      <I18nProvider>
+        <CssBaseline />
+        <GlobalStyles styles={globalStyles} />
+        <App />
+      </I18nProvider>
     </ThemeProvider>
   </StrictMode>,
 )

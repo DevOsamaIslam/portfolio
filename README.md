@@ -167,3 +167,62 @@ Open to conversations about frontend architecture, agile delivery and anything M
 - 📧 [osamasamarrai@gmail.com](mailto:osamasamarrai@gmail.com)
 - 💼 [LinkedIn ↗](https://www.linkedin.com/in/osama-islam-40441)
 - 🐙 [GitHub ↗](https://github.com/DevOsamaIslam)
+
+---
+
+## Localization
+
+The site ships in **English** and **Spanish** at runtime — no i18n library, no extra routes, no duplicated markup. Switching is instant and only the copy changes; layout, icons and links are shared.
+
+### Supported locales
+
+| Code | Language | Switcher pill | `<html lang>` |
+| ---- | -------- | ------------- | ------------- |
+| `en` | English  | `EN`          | `en`          |
+| `es` | Español  | `ES`          | `es`          |
+
+English is the authoring language and the fallback. Each locale supplies both halves of its content:
+
+| File                   | Holds                                                                                                           |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `src/i18n/locales.ts`  | The locale list itself, plus each language's label, short code and BCP-47 tag, and the resolution logic         |
+| `src/i18n/messages.ts` | UI chrome — nav, headings, buttons, kickers, stat labels, screen-reader strings, `<title>` and meta description |
+| `src/data/cv.ts`       | Narrative CV content — experience, projects, skills, certificates, education                                    |
+
+Both copy files are typed `Record<Locale, …>` and everything is read through the `useI18n()` hook:
+
+```tsx
+const { locale, setLocale, t, cv } = useI18n()
+```
+
+In the navbar switcher each option is labelled in its own language (a Spanish speaker looks for "Español"), while the group's accessible name follows the active locale.
+
+### Language resolution
+
+On first render the active language is resolved in this order:
+
+1. **Saved choice** — `localStorage` key `osama-portfolio:locale`, written every time a visitor picks a language.
+2. **Browser language** — the first of `navigator.languages` whose primary subtag is supported, so `es-419` and `es-ES` both resolve to `es`, and `en-GB` resolves to `en`. Falls back to the single `navigator.language` value when `navigator.languages` is empty.
+3. **English** — `DEFAULT_LOCALE`.
+
+Both storage reads are wrapped in `try/catch`, so when storage is unavailable (private mode, blocked cookies) the site still works — the choice simply does not survive a reload.
+
+To reset a visitor to step 2, clear the key in DevTools → Application → Local Storage, or run `localStorage.removeItem('osama-portfolio:locale')`.
+
+### Adding a language
+
+Because both copy files are `Record<Locale, …>`, a half-finished language cannot ship: the TypeScript build fails until every string exists.
+
+1. Add the code to `LOCALES` in `src/i18n/locales.ts` and its entry to `localeMeta` (in-language `label`, `short` pill text, BCP-47 `tag`).
+2. Add the complete `Messages` object for it in `src/i18n/messages.ts`, including the `meta` title and description.
+3. Add the complete `Cv` object for it in `src/data/cv.ts`.
+
+The switcher renders one segment per entry in `LOCALES`, so no component changes are needed. Verify with `npx tsc --noEmit` and `npm run build`.
+
+### Client-side only — known limitation
+
+Switching happens entirely in the browser and there are no per-language routes, which means:
+
+- `index.html` ships the English `<title>` and meta description, so crawlers and social previews always see English, even though `I18nProvider` rewrites the document metadata as soon as the page mounts.
+- There is no shareable per-language URL — the choice lives in `localStorage` on the visitor's device.
+- Properly localized SEO metadata would need prerendered per-locale routes (e.g. `/es`) — deliberately out of scope for now.

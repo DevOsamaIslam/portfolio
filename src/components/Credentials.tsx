@@ -4,7 +4,8 @@ import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import type { SxProps, Theme } from '@mui/material/styles'
 
-import { certificates, education, languages } from '../data/cv'
+import { certificates } from '../data/cv'
+import { useI18n } from '../i18n/I18nProvider'
 import { glassHover, glassTokens } from '../theme/glass'
 import Reveal from './Reveal'
 import Section from './Section'
@@ -28,18 +29,17 @@ const itemNameSx: SxProps<Theme> = { fontSize: '14.5px', fontWeight: 600 }
 const itemMetaSx: SxProps<Theme> = { fontSize: 13, color: 'text.disabled', mt: '2px' }
 
 export default function Credentials() {
+  const { t, cv } = useI18n()
+
   return (
     <Section id="credentials">
       <Container>
-        <SectionHead
-          kicker="Credentials"
-          title="Certificates, education & languages"
-        />
+        <SectionHead kicker={t.credentials.kicker} title={t.credentials.title} />
 
         <Box sx={gridSx}>
           <Reveal component={Card} sx={cardSx}>
             <Typography variant="h3" sx={{ fontSize: 15, fontWeight: 700, mb: '16px' }}>
-              Certifications
+              {t.credentials.certifications}
             </Typography>
 
             {certificates.map((certificate) => (
@@ -54,15 +54,15 @@ export default function Credentials() {
 
           <Reveal component={Card} sx={cardSx} delay={80}>
             <Typography variant="h3" sx={{ fontSize: 15, fontWeight: 700, mb: '16px' }}>
-              Education
+              {t.credentials.education}
             </Typography>
 
-            {education.map((entry) => (
+            {cv.education.map((entry) => (
               <Box sx={itemSx} key={entry.degree}>
                 <Typography sx={itemNameSx}>{entry.degree}</Typography>
                 <Typography sx={itemMetaSx}>
                   {entry.place} · {entry.year}
-                  {'current' in entry && entry.current ? ' · In progress' : ''}
+                  {entry.current ? ` · ${t.credentials.inProgress}` : ''}
                 </Typography>
               </Box>
             ))}
@@ -70,10 +70,10 @@ export default function Credentials() {
 
           <Reveal component={Card} sx={cardSx} delay={160}>
             <Typography variant="h3" sx={{ fontSize: 15, fontWeight: 700, mb: '16px' }}>
-              Languages
+              {t.credentials.languages}
             </Typography>
 
-            {languages.map((language) => (
+            {cv.languages.map((language) => (
               <Box sx={itemSx} key={language.name}>
                 <Box
                   sx={{

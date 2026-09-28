@@ -7,6 +7,7 @@ import { alpha } from '@mui/material/styles'
 import type { SxProps, Theme } from '@mui/material/styles'
 
 import { contacts } from '../data/cv'
+import { useI18n } from '../i18n/I18nProvider'
 import { externalLinkProps, isExternalLink } from '../utils/links'
 import { accents, glassTokens } from '../theme/glass'
 import Icon from './Icon'
@@ -30,6 +31,8 @@ const pillSx: SxProps<Theme> = {
 }
 
 export default function Contact() {
+  const { t, cv } = useI18n()
+
   return (
     <Section id="contact">
       <Container>
@@ -38,7 +41,7 @@ export default function Contact() {
           sx={{ p: 'clamp(32px, 5vw, 56px)', textAlign: 'center' }}
         >
           <Typography variant="h2" sx={{ fontSize: 'clamp(26px, 4vw, 34px)' }}>
-            Let’s talk
+            {t.contact.title}
           </Typography>
 
           <Typography
@@ -49,8 +52,7 @@ export default function Contact() {
               mx: 'auto',
             }}
           >
-            Open to conversations about frontend architecture, agile delivery and
-            anything MERN. Email is the fastest way to reach me.
+            {t.contact.body}
           </Typography>
 
           <Stack
@@ -61,9 +63,10 @@ export default function Contact() {
           >
             {contacts.map((contact) => (
               <Button
-                key={contact.label}
+                key={contact.icon}
                 variant="outlined"
                 href={contact.href}
+                title={`${cv.contactLabels[contact.icon]}: ${contact.value}`}
                 sx={pillSx}
                 startIcon={<Icon name={contact.icon} size={16} />}
                 endIcon={

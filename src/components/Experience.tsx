@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography'
 import { alpha } from '@mui/material/styles'
 import type { SxProps, Theme } from '@mui/material/styles'
 
-import { jobs } from '../data/cv'
+import { useI18n } from '../i18n/I18nProvider'
 import { accents, glassHover } from '../theme/glass'
 import Reveal from './Reveal'
 import Section from './Section'
@@ -82,17 +82,15 @@ const jobPointsSx: SxProps<Theme> = {
 }
 
 export default function Experience() {
+  const { t, cv } = useI18n()
+
   return (
     <Section id="experience">
       <Container>
-        <SectionHead
-          kicker="Experience"
-          title="Where I’ve worked"
-          sub="Seven years of aggregate experience in the IT sector, 3 years of ITIL and 4 years of web development, shipping CRM products and running the agile ceremonies that keep delivery predictable."
-        />
+        <SectionHead kicker={t.experience.kicker} title={t.experience.title} sub={t.experience.sub} />
 
         <Box sx={timelineSx}>
-          {jobs.map((job, index) => (
+          {cv.jobs.map((job, index) => (
             <Reveal
               key={`${job.company}-${job.role}`}
               component={Card}

@@ -4,18 +4,12 @@ import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import type { SxProps, Theme } from '@mui/material/styles'
 
-import { certificates, jobs, profile, projects } from '../data/cv'
+import { certificates, profile } from '../data/cv'
+import { useI18n } from '../i18n/I18nProvider'
 import { accents, glassTokens } from '../theme/glass'
 import Reveal from './Reveal'
 import Section from './Section'
 import SectionHead from './SectionHead'
-
-const stats = [
-  { value: profile.years, label: 'Years of experience' },
-  { value: `${jobs.length}`, label: 'Senior engineering roles' },
-  { value: `${projects.length}`, label: 'Projects shipped' },
-  { value: `${certificates.length}`, label: 'Certifications' },
-]
 
 const statsGridSx: SxProps<Theme> = {
   display: 'grid',
@@ -37,20 +31,31 @@ const statValueSx: SxProps<Theme> = {
 }
 
 export default function About() {
+  const { t, cv } = useI18n()
+
+  // Counts come from the active locale's CV, so the numbers always match the
+  // timeline and project grid below; only the labels are translated.
+  const stats = [
+    { key: 'years', value: profile.years },
+    { key: 'roles', value: `${cv.jobs.length}` },
+    { key: 'projects', value: `${cv.projects.length}` },
+    { key: 'certifications', value: `${certificates.length}` },
+  ] as const
+
   return (
     <Section id="about">
       <Container>
-        <SectionHead kicker="About" title="Software, delivered the agile way" />
+        <SectionHead kicker={t.about.kicker} title={t.about.title} />
 
         <Reveal
           component={Card}
           sx={{ p: 'clamp(28px, 4vw, 44px)', color: 'text.secondary' }}
         >
-          <Typography>{profile.summary}</Typography>
+          <Typography>{cv.summary}</Typography>
 
           <Box sx={statsGridSx}>
             {stats.map((stat) => (
-              <Box key={stat.label}>
+              <Box key={stat.key}>
                 <Typography variant="h3" component="strong" sx={statValueSx}>
                   {stat.value}
                 </Typography>
@@ -58,7 +63,7 @@ export default function About() {
                   component="span"
                   sx={{ display: 'block', mt: '2px', fontSize: 13, color: 'text.disabled' }}
                 >
-                  {stat.label}
+                  {t.about.stats[stat.key]}
                 </Typography>
               </Box>
             ))}
