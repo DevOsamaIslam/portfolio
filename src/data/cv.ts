@@ -56,7 +56,6 @@ export type ProjectId =
   | "asyncHandler"
   | "tradingBot"
   | "powBlockchain"
-  | "apologea"
 
 /**
  * Repo URLs below currently point at the GitHub profile plus the repo slug.
@@ -109,14 +108,7 @@ const projectMeta: readonly ProjectMeta[] = [
     name: "PoW Blockchain",
     tags: ["TypeScript", "Blockchain", "Cryptography"],
     href: githubProfile + "privchain",
-  },
-  {
-    id: "apologea",
-    name: "Apologea.com",
-    tags: ["Full Stack", "MERN", "Live Site"],
-    href: "https://apologea.com",
-    featured: true,
-  },
+   },
 ]
 
 export type SkillGroupId = "frontend" | "backend" | "testing" | "practices"
@@ -371,8 +363,6 @@ const projectCopy: Record<Locale, Record<ProjectId, string>> = {
       "Node.js trading bot using the KuCoin SDK with technical indicators and backtesting.",
     powBlockchain:
       "Proof-of-work blockchain implemented from scratch in modular TypeScript.",
-    apologea:
-      "Full-stack web product, live and in production — the flagship of my independent work.",
   },
   es: {
     useSmartValue:
@@ -387,8 +377,6 @@ const projectCopy: Record<Locale, Record<ProjectId, string>> = {
       "Bot de trading en Node.js que usa el SDK de KuCoin, con indicadores técnicos y backtesting.",
     powBlockchain:
       "Blockchain de prueba de trabajo implementada desde cero en TypeScript modular.",
-    apologea:
-      "Producto web full-stack, en producción y en vivo: el proyecto insignia de mi trabajo independiente.",
   },
   ar: {
     useSmartValue:
@@ -403,7 +391,6 @@ const projectCopy: Record<Locale, Record<ProjectId, string>> = {
       "بوت تداول بلغة Node.js يستخدم KuCoin SDK مع مؤشرات فنية واختبار خلفي.",
     powBlockchain:
       "سلسلة كتل بإثبات العمل مبنية من الصفر بـ TypeScript في وحدات مستقلة.",
-    apologea: "منتج ويب متكامل يعمل فعليًا — المشروع الأبرز في عملي المستقل.",
   },
 }
 
