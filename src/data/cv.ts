@@ -56,6 +56,11 @@ export type ProjectId =
   | "asyncHandler"
   | "tradingBot"
   | "powBlockchain"
+  | "antdForm"
+  | "libreFpl"
+  | "tealPlayer"
+  | "tyTranscriber"
+  | "useUrlParams"
 
 /**
  * Repo URLs below currently point at the GitHub profile plus the repo slug.
@@ -108,7 +113,37 @@ const projectMeta: readonly ProjectMeta[] = [
     name: "PoW Blockchain",
     tags: ["TypeScript", "Blockchain", "Cryptography"],
     href: githubProfile + "privchain",
-   },
+  },
+  {
+    id: "antdForm",
+    name: "AntD Custom Form",
+    tags: ["React", "Ant Design", "react-hook-form"],
+    href: githubProfile + "antd-custom-form",
+  },
+  {
+    id: "libreFpl",
+    name: "LibreFPL",
+    tags: ["React", "TypeScript", "Chart.js"],
+    href: githubProfile + "LibreFPL",
+  },
+  {
+    id: "tealPlayer",
+    name: "Teal Player",
+    tags: ["React", "TypeScript", "Video Player"],
+    href: githubProfile + "teal-player",
+  },
+  {
+    id: "tyTranscriber",
+    name: "Ty Transcriber",
+    tags: ["React", "TypeScript", "Whisper"],
+    href: githubProfile + "ty-transcriber",
+  },
+  {
+    id: "useUrlParams",
+    name: "useUrlParams",
+    tags: ["React", "TypeScript", "Hooks"],
+    href: githubProfile + "use-url-params",
+  },
 ]
 
 export type SkillGroupId = "frontend" | "backend" | "testing" | "practices"
@@ -363,6 +398,16 @@ const projectCopy: Record<Locale, Record<ProjectId, string>> = {
       "Node.js trading bot using the KuCoin SDK with technical indicators and backtesting.",
     powBlockchain:
       "Proof-of-work blockchain implemented from scratch in modular TypeScript.",
+    antdForm:
+      "Declarative Ant Design form component that maps field groups to inputs with react-hook-form validation.",
+    libreFpl:
+      "Fantasy Premier League data explorer with player comparisons, fixtures, and charts from local JSON snapshots.",
+    tealPlayer:
+      "Browser-based video player with local video and VTT caption uploads, keyboard shortcuts, and full playback controls.",
+    tyTranscriber:
+      "Full-stack transcription app that collects YouTube captions or Whisper transcriptions with a searchable transcript library.",
+    useUrlParams:
+      "React hook for managing URL search parameters, keeping component state and the address bar in sync.",
   },
   es: {
     useSmartValue:
@@ -377,6 +422,16 @@ const projectCopy: Record<Locale, Record<ProjectId, string>> = {
       "Bot de trading en Node.js que usa el SDK de KuCoin, con indicadores técnicos y backtesting.",
     powBlockchain:
       "Blockchain de prueba de trabajo implementada desde cero en TypeScript modular.",
+    antdForm:
+      "Componente de formulario declarativo para Ant Design que mapea grupos de campos a entradas con validación de react-hook-form.",
+    libreFpl:
+      "Explorador de datos de Fantasy Premier League con comparaciones de jugadores, fixtures y gráficos a partir de copias locales en JSON.",
+    tealPlayer:
+      "Reproductor de video en el navegador con carga local de videos y subtítulos VTT, atajos de teclado y controles completos de reproducción.",
+    tyTranscriber:
+      "Aplicación de transcripción full-stack que obtiene subtítulos de YouTube o transcripciones de Whisper con una biblioteca de transcripciones buscable.",
+    useUrlParams:
+      "Hook de React para gestionar parámetros de búsqueda de la URL, manteniendo el estado del componente y la barra de direcciones sincronizados.",
   },
   ar: {
     useSmartValue:
@@ -391,6 +446,16 @@ const projectCopy: Record<Locale, Record<ProjectId, string>> = {
       "بوت تداول بلغة Node.js يستخدم KuCoin SDK مع مؤشرات فنية واختبار خلفي.",
     powBlockchain:
       "سلسلة كتل بإثبات العمل مبنية من الصفر بـ TypeScript في وحدات مستقلة.",
+    antdForm:
+      "مكوّن نموذج تصريحي لـ Ant Design يحوّل مجموعات الحقول إلى مدخلات مع تحقق عبر react-hook-form.",
+    libreFpl:
+      "مستكشف بيانات Fantasy Premier League مع مقارنات اللاعبين والمباريات والرسوم البيانية من نسخ JSON محلية.",
+    tealPlayer:
+      "مشغّل فيديو في المتصفح يدعم تحميل الفيديو وترجمة VTT محليًا، مع اختصارات لوحة المفاتيح وأدوات تشغيل كاملة.",
+    tyTranscriber:
+      "تطبيق نسخ full-stack يجمع الترجمة من يوتيوب أو النسخ عبر Whisper مع مكتبة نصوص قابلة للبحث.",
+    useUrlParams:
+      "Hook من React لإدارة معاملات البحث في عنوان URL، مع إبقاء حالة المكوّن والعنوان متزامنين.",
   },
 }
 
